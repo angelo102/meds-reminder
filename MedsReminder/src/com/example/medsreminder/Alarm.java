@@ -1,18 +1,17 @@
 package com.example.medsreminder;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.io.StreamCorruptedException;
+
+import android.content.Context;
 
 public class Alarm implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	public final static String SERIALIZED_FILENAME ="alarms.bin";
 	
 	
 	private int[] days = new int[7];
@@ -37,34 +36,48 @@ public class Alarm implements Serializable{
 	}
 	
 	
-	public void serializeClass(){
+	public void serializeClass(Context c){
+		
 		try {
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("save.bin")));
+			
+			FileOutputStream fos = c.openFileOutput(SERIALIZED_FILENAME,Context.MODE_PRIVATE);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			
 			oos.writeObject(this);
+			
 			oos.flush();
 			oos.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
+			
+			fos.close();
+		
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
 	
-	public void loadClass(File f){
+	public Alarm loadSerializedClass(Context c){
+		
+		Alarm alarm = new Alarm();
 		
 		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
-			Object o = ois.readObject();
+			FileInputStream fis = c.openFileInput(SERIALIZED_FILENAME);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			
+			alarm = (Alarm)ois.readObject();
 			
 			ois.close();
-		} catch (Exception e) {
+			
+			fis.close();
+			
+		} 
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		return alarm;
 		
 	}
 }
