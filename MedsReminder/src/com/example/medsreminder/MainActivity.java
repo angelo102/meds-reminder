@@ -2,9 +2,11 @@ package com.example.medsreminder;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
 public class MainActivity extends Activity {
 
@@ -12,6 +14,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
 		
 	}
 
@@ -23,8 +26,10 @@ public class MainActivity extends Activity {
 		
 	}
 	
+	
 	public void sendMessage(View view){
 		
+	/*
 		Alarm al = new Alarm();
 		al.setMedName("Panadol");
 		al.serializeClass(view.getContext());
@@ -35,6 +40,13 @@ public class MainActivity extends Activity {
 		
 		Button bt = (Button)findViewById(R.id.button1);
 		bt.setText(al2.getMedName());
+		*/
+		
+		Intent intent = new Intent(this,ListViewActivity.class);
+		//intent.putExtra(EXTRA_MESSAGE, message);
+		startActivity(intent);
+		
+		
 	}
-
+	
 }

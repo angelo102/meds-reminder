@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Date;
 
 import android.content.Context;
 
@@ -16,6 +17,11 @@ public class Alarm implements Serializable{
 	
 	private int[] days = new int[7];
 	private String medName = "";
+	private String medDesciption = "";
+	private Date initialDate;
+	private Date initialTime;
+	private int hourInterval;
+	private int minutesInterval;
 	
 	//private static final 
 
@@ -33,6 +39,46 @@ public class Alarm implements Serializable{
 
 	public void setMedName(String medName) {
 		this.medName = medName;
+	}
+	
+	public String getMedDesciption() {
+		return medDesciption;
+	}
+
+	public void setMedDesciption(String medDesciption) {
+		this.medDesciption = medDesciption;
+	}
+
+	public Date getInitialDate() {
+		return initialDate;
+	}
+
+	public void setInitialDate(Date initialDate) {
+		this.initialDate = initialDate;
+	}
+
+	public Date getInitialTime() {
+		return initialTime;
+	}
+
+	public void setInitialTime(Date initialTime) {
+		this.initialTime = initialTime;
+	}
+
+	public int getHourInterval() {
+		return hourInterval;
+	}
+
+	public void setHourInterval(int hourInterval) {
+		this.hourInterval = hourInterval;
+	}
+
+	public int getMinutesInterval() {
+		return minutesInterval;
+	}
+
+	public void setMinutesInterval(int minutesInterval) {
+		this.minutesInterval = minutesInterval;
 	}
 	
 	
@@ -80,5 +126,7 @@ public class Alarm implements Serializable{
 		return alarm;
 		
 	}
+
+	
 }
 

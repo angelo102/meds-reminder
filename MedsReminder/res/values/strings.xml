@@ -6,5 +6,7 @@
     <string name="hello_world">Take your Meds!!!</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="team_name">Take Your Meds!!! by Team 2 CSE5324</string>
+    <string name="title_activity_list_view">ListViewActivity</string>
+    <string name="title_activity_med_detail">MedDetailActivity</string>
 
 </resources>
