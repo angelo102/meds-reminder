@@ -19,7 +19,16 @@ public class ListViewActivity extends ListActivity {
 		
 		//Test ListView
 		//ListView lv = (ListView)findViewById(R.id.medlistView);
-		String [] values = new String [] {"list1","List2","List3"};
+		
+		
+		AlarmManager alarmManager = new AlarmManager();
+		alarmManager = alarmManager.loadSerializedClass(getApplicationContext());
+		String [] values = alarmManager.GetAlarmNames();
+		
+		//for(int i =0; i < alarmManager.AlarmCount(); i++){
+		
+			
+		//}
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, values);
 		setListAdapter(adapter);

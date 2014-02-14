@@ -18,10 +18,9 @@
         <TableLayout
             android:id="@+id/tableLayout"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
+            android:layout_height="fill_parent">
 
             <TableRow>
-
                 <TextView
                     android:id="@+id/textViewName"
                     android:layout_width="wrap_content"
@@ -33,7 +32,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10" >
-
                     <requestFocus />
                 </EditText>
             </TableRow>
@@ -67,25 +65,22 @@
                     android:layout_height="wrap_content"
                     android:ems="10" />
             </TableRow>
-
             <TableRow>
-
                 <TextView
                     android:id="@+id/textViewDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="17dp"
                     android:text="Date:" />
-
+                
                 <DatePicker
                     android:id="@+id/datePicker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    android:calendarViewShown="false" />
             </TableRow>
-
             <TableRow>
-
                 <TextView
                     android:id="@+id/textViewTime"
                     android:layout_width="wrap_content"
@@ -97,9 +92,56 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </TableRow>
+			<TableRow
+			    android:orientation="vertical">
 
+				    <CheckBox
+				        android:id="@+id/chkBoxMon"
+				        android:layout_width="0dip"
+				        android:layout_gravity="center"
+				        android:layout_weight="1"
+				        android:text="MON" />
+
+				    <CheckBox
+				        android:id="@+id/chkBoxTue"
+				        android:layout_width="0dip"
+				        android:layout_weight="1"
+				        android:text="TUE" />
+
+				    <CheckBox 
+				        android:id="@+id/chkBoxWed"
+				        android:layout_width="0dip"
+				        android:layout_weight="1"
+	                    android:text="WED"
+	                    />
+				    <CheckBox 
+				        android:id="@+id/chkBoThu"
+				        android:layout_width="0dip"
+				        android:layout_weight="1"
+	                    android:text="THU"
+	                    />
+
+				    <CheckBox
+				        android:id="@+id/chkBoxFri"
+				        android:layout_width="0dip"
+				        android:layout_weight="1"
+				        android:text="FRY" />
+
+				    <CheckBox 
+				        android:id="@+id/chkBoxSat"
+				        android:layout_width="0dip"
+				        android:layout_weight="1"
+	                    android:text="SAT"
+	                    />
+				    <CheckBox 
+				        android:id="@+id/chkBoxSun"
+				       	android:layout_width="0dip"
+				        android:layout_weight="1"
+	                    android:text="SUN"
+	                 
+	                    />
+			</TableRow>	
             <TableRow>
-
                 <TextView
                     android:id="@+id/textViewInterval"
                     android:layout_width="wrap_content"

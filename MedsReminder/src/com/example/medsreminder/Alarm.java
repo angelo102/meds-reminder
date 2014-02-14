@@ -9,6 +9,7 @@ import java.util.Date;
 
 import android.content.Context;
 
+
 public class Alarm implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -19,9 +20,10 @@ public class Alarm implements Serializable{
 	private String medName = "";
 	private String medDesciption = "";
 	private Date initialDate;
-	private Date initialTime;
+	private Time initialTime;
 	private int hourInterval;
 	private int minutesInterval;
+	private int dose;
 	
 	//private static final 
 
@@ -57,11 +59,11 @@ public class Alarm implements Serializable{
 		this.initialDate = initialDate;
 	}
 
-	public Date getInitialTime() {
+	public Time getInitialTime() {
 		return initialTime;
 	}
 
-	public void setInitialTime(Date initialTime) {
+	public void setInitialTime(Time initialTime) {
 		this.initialTime = initialTime;
 	}
 
@@ -127,6 +129,16 @@ public class Alarm implements Serializable{
 		
 	}
 
+	public int getDose() {
+		return dose;
+	}
+
+	public void setDose(int dose) {
+		this.dose = dose;
+	}
+
 	
 }
+
+
 
