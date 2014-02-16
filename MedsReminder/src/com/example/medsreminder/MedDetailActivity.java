@@ -4,6 +4,7 @@ import java.util.Date;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -64,43 +65,46 @@ public class MedDetailActivity extends Activity {
 		chkBoxSun = (CheckBox)findViewById(R.id.chkBoxSun);
 		editTextInterval = (EditText)findViewById(R.id.editTextInterval);
 		
-		alarmManager = new AlarmManager();
-		alarmManager = alarmManager.loadSerializedClass(getApplicationContext());
+		if(this.ValidateFields()){
+			
+			alarmManager = new AlarmManager();
+			alarmManager = alarmManager.loadSerializedClass(getApplicationContext());
+			
+			Alarm al = new Alarm();
 		
-		Alarm al = new Alarm();
-	
-		al.setMedName(editTextName.getText().toString());
-		al.setMedDesciption(editTextDesc.getText().toString());
-		
-		int dose = Integer.parseInt(editTextDose.getText().toString());
-		al.setDose(dose);
-		
-		int year = datePicker.getYear();
-		int month = datePicker.getMonth();
-		int day = datePicker.getDayOfMonth();
-		al.setInitialDate(new Date(year,month,day));
-		
-		Time time = new Time();
-		time.setHour(timePicker.getCurrentHour());
-		time.setMinutes(timePicker.getCurrentHour());
-		al.setInitialTime(time);
-		
-		al.setMonRepeat(chkBoxMon.isChecked());
-		al.setTueRepeat(chkBoxTue.isChecked());
-		al.setWedRepeat(chkBoxWed.isChecked());
-		al.setThuRepeat(chkBoxThu.isChecked());
-		al.setFriRepeat(chkBoxFri.isChecked());
-		al.setSatRepeat(chkBoxSat.isChecked());
-		al.setSunRepeat(chkBoxSun.isChecked());
-		
-		alarmManager.AddAlarm(al);
-		alarmManager.serializeClass(view.getContext());
-				
-		Toast.makeText(this, "Alarm Saved", Toast.LENGTH_LONG).show();
-		
-		Intent intent = new Intent(this,ListViewActivity.class);
-		//intent.putExtra(EXTRA_MESSAGE, message);
-		startActivity(intent);
+			al.setMedName(editTextName.getText().toString());
+			al.setMedDesciption(editTextDesc.getText().toString());
+			
+			int dose = Integer.parseInt(editTextDose.getText().toString());
+			al.setDose(dose);
+			
+			int year = datePicker.getYear();
+			int month = datePicker.getMonth();
+			int day = datePicker.getDayOfMonth();
+			al.setInitialDate(new Date(year,month,day));
+			
+			Time time = new Time();
+			time.setHour(timePicker.getCurrentHour());
+			time.setMinutes(timePicker.getCurrentHour());
+			al.setInitialTime(time);
+			
+			al.setMonRepeat(chkBoxMon.isChecked());
+			al.setTueRepeat(chkBoxTue.isChecked());
+			al.setWedRepeat(chkBoxWed.isChecked());
+			al.setThuRepeat(chkBoxThu.isChecked());
+			al.setFriRepeat(chkBoxFri.isChecked());
+			al.setSatRepeat(chkBoxSat.isChecked());
+			al.setSunRepeat(chkBoxSun.isChecked());
+			
+			alarmManager.AddAlarm(al);
+			alarmManager.serializeClass(view.getContext());
+					
+			Toast.makeText(this, "Alarm Saved", Toast.LENGTH_LONG).show();
+			
+			Intent intent = new Intent(this,ListViewActivity.class);
+			//intent.putExtra(EXTRA_MESSAGE, message);
+			startActivity(intent);
+		}
 	}
 
 	public void cancelMethod(View view){
@@ -122,5 +126,36 @@ public class MedDetailActivity extends Activity {
 		else if(alarmId != null){
 			Toast.makeText(this, "Existing Alarm", Toast.LENGTH_LONG).show();
 		}
+	}
+	
+	private boolean ValidateFields(){   
+		
+		String name;
+		String desc;
+		int dose;
+		try{
+			name = ((EditText)findViewById(R.id.editTextName)).getText().toString();                                                                       
+			desc = ((EditText)findViewById(R.id.editTextDesc)).getText().toString();                                                                       
+			dose = Integer.parseInt(((EditText)findViewById(R.id.editTextDose)).getText().toString());
+			
+			//Check empty values or 0 values
+			if(name.trim().equals("") || desc.trim().equals("") || dose==0 ){
+				AlertDialog alert=new AlertDialog.Builder(MedDetailActivity.this).create();                                                                 
+				alert.setMessage("Values cannot be empty or 0");                                                                                           
+				alert.show();      
+				return false;
+			}
+			
+		}
+		catch(Exception e){
+			AlertDialog alert=new AlertDialog.Builder(MedDetailActivity.this).create();                                                                 
+			alert.setMessage("Non-numeric value for dose or interval");                                                                                           
+			alert.show();      
+			return false;
+		}
+		
+		return true;
+		
+
 	}
 }
