@@ -11,6 +11,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class ListViewActivity extends ListActivity {
+	
+	public final static String EXTRA_ALARM_ID ="com.example.medsreminder.ALARM_ID";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +49,22 @@ public class ListViewActivity extends ListActivity {
 	
 	@Override
 	  protected void onListItemClick(ListView l, View v, int position, long id) {
-	    String item = (String) getListAdapter().getItem(position);
+	    
+		String item = (String) getListAdapter().getItem(position);
 	    Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
+	    
+	    //Open MedDetail Activity with selected Alarm
+	    Intent intent = new Intent(this,MedDetailActivity.class);
+	    intent.putExtra(EXTRA_ALARM_ID, String.valueOf(position));
+	    startActivity(intent);
+	    
 	  }
 	
-	public void sendMessage(View view){
+	public void addNewAlarm(View view){
 		
+		//Open MedDetail Activity to Add a new alarm
 		Intent intent = new Intent(this,MedDetailActivity.class);
-		//intent.putExtra(EXTRA_MESSAGE, message);
+		intent.putExtra(EXTRA_ALARM_ID, "NEW ALARM");
 		startActivity(intent);
 		
 		}

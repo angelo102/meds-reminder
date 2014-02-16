@@ -115,7 +115,7 @@
 	                    android:text="WED"
 	                    />
 				    <CheckBox 
-				        android:id="@+id/chkBoThu"
+				        android:id="@+id/chkBoxThu"
 				        android:layout_width="0dip"
 				        android:layout_weight="1"
 	                    android:text="THU"

@@ -16,24 +16,34 @@ public class Alarm implements Serializable{
 	public final static String SERIALIZED_FILENAME ="alarms.bin";
 	
 	
-	private int[] days = new int[7];
+	//private boolean[] days = new boolean[7];
 	private String medName = "";
 	private String medDesciption = "";
 	private Date initialDate;
 	private Time initialTime;
+	private boolean monRepeat = false;
+	private boolean tueRepeat = false;
+	private boolean wedRepeat = false;
+	private boolean thuRepeat = false;
+	private boolean friRepeat = false;
+	private boolean satRepeat = false;
+	private boolean sunRepeat = false;
 	private int hourInterval;
 	private int minutesInterval;
 	private int dose;
 	
 	//private static final 
 
-	public int[] getDays() {
+	/*
+	public boolean[] getDays() {
 		return days;
 	}
 
-	public void setDays(int[] days) {
+	public void setDays(boolean[] days) {
 		this.days = days;
 	}
+	
+	*/
 
 	public String getMedName() {
 		return medName;
@@ -135,6 +145,62 @@ public class Alarm implements Serializable{
 
 	public void setDose(int dose) {
 		this.dose = dose;
+	}
+
+	public boolean isMonRepeat() {
+		return monRepeat;
+	}
+
+	public void setMonRepeat(boolean monRepeat) {
+		this.monRepeat = monRepeat;
+	}
+
+	public boolean isTueRepeat() {
+		return tueRepeat;
+	}
+
+	public void setTueRepeat(boolean tueRepeat) {
+		this.tueRepeat = tueRepeat;
+	}
+
+	public boolean isWedRepeat() {
+		return wedRepeat;
+	}
+
+	public void setWedRepeat(boolean wedRepeat) {
+		this.wedRepeat = wedRepeat;
+	}
+
+	public boolean isThuRepeat() {
+		return thuRepeat;
+	}
+
+	public void setThuRepeat(boolean thuRepeat) {
+		this.thuRepeat = thuRepeat;
+	}
+
+	public boolean isFriRepeat() {
+		return friRepeat;
+	}
+
+	public void setFriRepeat(boolean friRepeat) {
+		this.friRepeat = friRepeat;
+	}
+
+	public boolean isSatRepeat() {
+		return satRepeat;
+	}
+
+	public void setSatRepeat(boolean satRepeat) {
+		this.satRepeat = satRepeat;
+	}
+
+	public boolean isSunRepeat() {
+		return sunRepeat;
+	}
+
+	public void setSunRepeat(boolean sunRepeat) {
+		this.sunRepeat = sunRepeat;
 	}
 
 	

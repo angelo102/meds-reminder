@@ -7,16 +7,35 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 public class MedDetailActivity extends Activity {
-
+	
+	private AlarmManager alarmManager;
+	EditText editTextName;
+	EditText editTextDesc;
+	EditText editTextDose;
+	DatePicker datePicker;
+	TimePicker timePicker;
+	CheckBox chkBoxMon;
+	CheckBox chkBoxTue;
+	CheckBox chkBoxWed;
+	CheckBox chkBoxThu;
+	CheckBox chkBoxFri;
+	CheckBox chkBoxSat;
+	CheckBox chkBoxSun;
+	EditText editTextInterval;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		this.loadMedicine();
+		
 		setContentView(R.layout.activity_med_detail);
 	}
 
@@ -28,39 +47,54 @@ public class MedDetailActivity extends Activity {
 	}
 	
 	public void saveMethod(View view){
+
+		//Get controls from UI
+		
+		editTextName = (EditText)findViewById(R.id.editTextName);
+		editTextDesc = (EditText)findViewById(R.id.editTextDesc);
+		editTextDose = (EditText)findViewById(R.id.editTextDose);
+		datePicker = (DatePicker)findViewById(R.id.datePicker);
+		timePicker = (TimePicker)findViewById(R.id.timePicker);
+		chkBoxMon = (CheckBox)findViewById(R.id.chkBoxMon);
+		chkBoxTue = (CheckBox)findViewById(R.id.chkBoxTue);
+		chkBoxWed = (CheckBox)findViewById(R.id.chkBoxWed);
+		chkBoxThu = (CheckBox)findViewById(R.id.chkBoxThu);
+		chkBoxFri = (CheckBox)findViewById(R.id.chkBoxFri);
+		chkBoxSat = (CheckBox)findViewById(R.id.chkBoxSat);
+		chkBoxSun = (CheckBox)findViewById(R.id.chkBoxSun);
+		editTextInterval = (EditText)findViewById(R.id.editTextInterval);
+		
+		alarmManager = new AlarmManager();
+		alarmManager = alarmManager.loadSerializedClass(getApplicationContext());
 		
 		Alarm al = new Alarm();
+	
+		al.setMedName(editTextName.getText().toString());
+		al.setMedDesciption(editTextDesc.getText().toString());
 		
-		//Retrieve name from UI
-		String name = ((EditText)findViewById(R.id.editTextName)).getText().toString();
-		al.setMedName(name);
-		
-		String desc = ((EditText)findViewById(R.id.editTextDesc)).getText().toString();
-		al.setMedDesciption(desc);
-		
-		int dose = Integer.parseInt(((EditText)findViewById(R.id.editTextDose)).getText().toString());
+		int dose = Integer.parseInt(editTextDose.getText().toString());
 		al.setDose(dose);
 		
-		DatePicker dp = (DatePicker)findViewById(R.id.datePicker);
-		int year = dp.getYear();
-		int month = dp.getMonth();
-		int day = dp.getDayOfMonth();
-		Date date = new Date(year,month,day);
-		al.setInitialDate(date);
-		
-		TimePicker tp = (TimePicker)findViewById(R.id.timePicker);
+		int year = datePicker.getYear();
+		int month = datePicker.getMonth();
+		int day = datePicker.getDayOfMonth();
+		al.setInitialDate(new Date(year,month,day));
 		
 		Time time = new Time();
-		time.setHour(tp.getCurrentHour());
-		time.setMinutes(tp.getCurrentHour());
-
+		time.setHour(timePicker.getCurrentHour());
+		time.setMinutes(timePicker.getCurrentHour());
 		al.setInitialTime(time);
 		
-		//al.serializeClass(view.getContext());
-		AlarmManager am = new AlarmManager();
-		am = am.loadSerializedClass(view.getContext());
-		am.AddAlarm(al);
-		am.serializeClass(view.getContext());
+		al.setMonRepeat(chkBoxMon.isChecked());
+		al.setTueRepeat(chkBoxTue.isChecked());
+		al.setWedRepeat(chkBoxWed.isChecked());
+		al.setThuRepeat(chkBoxThu.isChecked());
+		al.setFriRepeat(chkBoxFri.isChecked());
+		al.setSatRepeat(chkBoxSat.isChecked());
+		al.setSunRepeat(chkBoxSun.isChecked());
+		
+		alarmManager.AddAlarm(al);
+		alarmManager.serializeClass(view.getContext());
 				
 		Toast.makeText(this, "Alarm Saved", Toast.LENGTH_LONG).show();
 		
@@ -71,6 +105,22 @@ public class MedDetailActivity extends Activity {
 
 	public void cancelMethod(View view){
 		
+		//Return to ListView Activity
+		Intent intent = new Intent(this,ListViewActivity.class);
+		startActivity(intent);
+	}
+	
+	private void loadMedicine(){
 		
+		String alarmId = getIntent().getStringExtra(ListViewActivity.EXTRA_ALARM_ID);
+		
+		//Prepare Activity Default values for new alarm
+		if(alarmId == "NEW ALARM"){
+			Toast.makeText(this, "New Alarm", Toast.LENGTH_LONG).show();
+		}
+		//Load values of selected alarm
+		else if(alarmId != null){
+			Toast.makeText(this, "Existing Alarm", Toast.LENGTH_LONG).show();
+		}
 	}
 }
