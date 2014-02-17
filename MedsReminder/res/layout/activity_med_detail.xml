@@ -63,14 +63,16 @@
                     android:id="@+id/editTextDose"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10" />
+                    android:ems="10"
+                    android:inputType="number" />
+
             </TableRow>
             <TableRow>
                 <TextView
                     android:id="@+id/textViewDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="17dp"
+                    android:layout_marginTop="0dp"
                     android:text="Date:" />
                 
                 <DatePicker
@@ -143,34 +145,46 @@
 			</TableRow>	
             <TableRow>
                 <TextView
-                    android:id="@+id/textViewInterval"
+                    android:id="@+id/textViewHourInterval"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Interval" />
+                    android:text="Hour Interval:" />
 
                 <EditText
-                    android:id="@+id/editTextInterval"
+                    android:id="@+id/editTextHourInterval"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10" />
             </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/textViewMinuteInterval"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Minute Interval:" />
+
+                <EditText
+                    android:id="@+id/editTextMinunteInterval"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10" />
+                
+            </TableRow>
             <TableRow >
                 <Button 
-					android:layout_width="wrap_content"
         			android:layout_height="wrap_content"
+        			android:layout_weight="1"
         			android:text="Save" 
         			android:onClick="saveMethod" />
                 
-                
                 <Button
         			android:layout_height="wrap_content"
+        			android:layout_weight="1"
         			android:text="Cancel" 
         			android:onClick="cancelMethod" />
               
             </TableRow>
         </TableLayout>
-        
-    
 </ScrollView>
 
 </LinearLayout>

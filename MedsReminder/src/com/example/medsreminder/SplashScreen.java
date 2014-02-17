@@ -9,7 +9,7 @@ import android.view.Menu;
 public class SplashScreen extends Activity {
 
 	//Splash Screen Timer
-	private static int S_TIME_OUT = 5000;
+	private static int S_TIME_OUT = 3000;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class SplashScreen extends Activity {
 					
 					@Override
 					public void run(){
-						Intent i = new Intent(SplashScreen.this, MainActivity.class);
+						Intent i = new Intent(SplashScreen.this, ListViewActivity.class);
 						startActivity(i);
 						
 						finish();
