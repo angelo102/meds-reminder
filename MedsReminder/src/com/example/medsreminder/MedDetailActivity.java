@@ -132,6 +132,8 @@ public class MedDetailActivity extends Activity {
 
 			//Prepare Activity Default values for new alarm
 			if(alarmId.equals("NEW ALARM")){
+				editTextHourInterval.setText(String.valueOf(0));
+				editTextMinuteInterval.setText(String.valueOf(0));
 				Toast.makeText(this, "New Alarm", Toast.LENGTH_LONG).show();
 			}
 			else{
@@ -212,11 +214,20 @@ public class MedDetailActivity extends Activity {
 				return false;
 			}
 			
-			//Check numeric values are positive	
-			if(dose < 1 || hrInterval < 1 || minInterval < 1)
+			//Check dose is greater than 0	
+			if(dose < 1 )
 			{
 				AlertDialog alert=new AlertDialog.Builder(MedDetailActivity.this).create();                                                                 
-				alert.setMessage("Numeric values should be positive");                                                                                           
+				alert.setMessage("Dose should be greater than 0Numeric values should be positive");                                                                                           
+				alert.show();      
+				return false;
+			}
+			
+			//Check interval values are positive
+			if(hrInterval < 0 || minInterval < 0)
+			{
+				AlertDialog alert=new AlertDialog.Builder(MedDetailActivity.this).create();                                                                 
+				alert.setMessage("Intervals should be positive number values");                                                                                           
 				alert.show();      
 				return false;
 			}
