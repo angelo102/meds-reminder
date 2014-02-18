@@ -18,20 +18,22 @@
         <TableLayout
             android:id="@+id/tableLayout"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content">
 
             <TableRow>
                 <TextView
                     android:id="@+id/textViewName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/textview_name" />
+                    android:text="@string/detailview_textview_name" />
 
                 <EditText
                     android:id="@+id/editTextName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10" >
+                    android:ems="10"
+                    android:inputType="text"
+                   >
                     <requestFocus />
                 </EditText>
             </TableRow>
@@ -42,13 +44,14 @@
                     android:id="@+id/textViewDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/textview_desc" />
+                    android:text="@string/detailview_textview_desc" />
 
                 <EditText
                     android:id="@+id/editTextDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10" />
+                    android:inputType="text"
+                    />
             </TableRow>
 
             <TableRow>
@@ -57,7 +60,7 @@
                     android:id="@+id/textViewDose"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dose" />
+                    android:text="@string/detailview_textview_dose" />
 
                 <EditText
                     android:id="@+id/editTextDose"
@@ -73,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="0dp"
-                    android:text="Date:" />
+                    android:text="@string/detailview_textview_date" />
                 
                 <DatePicker
                     android:id="@+id/datePicker"
@@ -87,7 +90,7 @@
                     android:id="@+id/textViewTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Time:" />
+                    android:text="@string/detailview_textview_date" />
 
                 <TimePicker
                     android:id="@+id/timePicker"
@@ -102,44 +105,44 @@
 				        android:layout_width="0dip"
 				        android:layout_gravity="center"
 				        android:layout_weight="1"
-				        android:text="MON" />
+				        android:text="@string/detailview_checkbox_textview_mon" />
 
 				    <CheckBox
 				        android:id="@+id/chkBoxTue"
 				        android:layout_width="0dip"
 				        android:layout_weight="1"
-				        android:text="TUE" />
+				        android:text="@string/detailview_checkbox_textview_tue" />
 
 				    <CheckBox 
 				        android:id="@+id/chkBoxWed"
 				        android:layout_width="0dip"
 				        android:layout_weight="1"
-	                    android:text="WED"
+	                    android:text="@string/detailview_checkbox_textview_wed"
 	                    />
 				    <CheckBox 
 				        android:id="@+id/chkBoxThu"
 				        android:layout_width="0dip"
 				        android:layout_weight="1"
-	                    android:text="THU"
+	                    android:text="@string/detailview_checkbox_textview_thr"
 	                    />
 
 				    <CheckBox
 				        android:id="@+id/chkBoxFri"
 				        android:layout_width="0dip"
 				        android:layout_weight="1"
-				        android:text="FRY" />
+				        android:text="@string/detailview_checkbox_textview_fri" />
 
 				    <CheckBox 
 				        android:id="@+id/chkBoxSat"
 				        android:layout_width="0dip"
 				        android:layout_weight="1"
-	                    android:text="SAT"
+	                    android:text="@string/detailview_checkbox_textview_sat"
 	                    />
 				    <CheckBox 
 				        android:id="@+id/chkBoxSun"
 				       	android:layout_width="0dip"
 				        android:layout_weight="1"
-	                    android:text="SUN"
+	                    android:text="@string/detailview_checkbox_textview_sun"
 	                 
 	                    />
 			</TableRow>	
@@ -148,7 +151,7 @@
                     android:id="@+id/textViewHourInterval"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hour Interval:" />
+                    android:text="@string/detailview_textview_hinterval" />
 
                 <EditText
                     android:id="@+id/editTextHourInterval"
@@ -162,14 +165,15 @@
                     android:id="@+id/textViewMinuteInterval"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Minute Interval:"
-                    android:inputType="number" />
+                    android:text="@string/detailview_textview_minterval"
+                     />
 
                 <EditText
                     android:id="@+id/editTextMinunteInterval"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10" 
+                    android:inputType="number"
                     />
                 
             </TableRow>
@@ -177,13 +181,13 @@
                 <Button 
         			android:layout_height="wrap_content"
         			android:layout_weight="1"
-        			android:text="Save" 
+        			android:text="@string/detailview_button_save" 
         			android:onClick="saveMethod" />
                 
                 <Button
         			android:layout_height="wrap_content"
         			android:layout_weight="1"
-        			android:text="Cancel" 
+        			android:text="@string/detailview_button_cancel" 
         			android:onClick="cancelMethod" />
               
             </TableRow>
