@@ -25,7 +25,7 @@
                     android:id="@+id/textViewName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name:" />
+                    android:text="@string/textview_name" />
 
                 <EditText
                     android:id="@+id/editTextName"
@@ -42,7 +42,7 @@
                     android:id="@+id/textViewDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Description:" />
+                    android:text="@string/textview_desc" />
 
                 <EditText
                     android:id="@+id/editTextDesc"
@@ -154,20 +154,23 @@
                     android:id="@+id/editTextHourInterval"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10" />
+                    android:ems="10" 
+                    android:inputType="number"/>
             </TableRow>
             <TableRow>
                 <TextView
                     android:id="@+id/textViewMinuteInterval"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Minute Interval:" />
+                    android:text="Minute Interval:"
+                    android:inputType="number" />
 
                 <EditText
                     android:id="@+id/editTextMinunteInterval"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10" />
+                    android:ems="10" 
+                    />
                 
             </TableRow>
             <TableRow >
