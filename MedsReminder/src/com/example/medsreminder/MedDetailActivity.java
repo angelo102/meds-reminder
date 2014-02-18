@@ -111,7 +111,9 @@ public class MedDetailActivity extends Activity {
 			}
 		}
 		catch(Exception e){
-
+			AlertDialog alert=new AlertDialog.Builder(MedDetailActivity.this).create();                                                                 
+			alert.setMessage("Error Saving Alarm. " + e.getMessage());                                                                                           
+			alert.show();      
 		}
 	
 	}

@@ -17,13 +17,13 @@
     <string name="detailview_textview_minterval">Min Interval:</string>
     <string name="detailview_button_save">Save</string>
     <string name="detailview_button_cancel">Cancel</string>
-    <string name="detailview_checkbox_textview_mon">M</string>
-    <string name="detailview_checkbox_textview_tue">T</string>
-    <string name="detailview_checkbox_textview_wed">W</string>
-    <string name="detailview_checkbox_textview_thr">T</string>
-    <string name="detailview_checkbox_textview_fri">F</string>
-    <string name="detailview_checkbox_textview_sat">S</string>
-    <string name="detailview_checkbox_textview_sun">S</string>
+    <string name="detailview_checkbox_textview_mon">Mo</string>
+    <string name="detailview_checkbox_textview_tue">Tu</string>
+    <string name="detailview_checkbox_textview_wed">We</string>
+    <string name="detailview_checkbox_textview_thr">Th</string>
+    <string name="detailview_checkbox_textview_fri">Fr</string>
+    <string name="detailview_checkbox_textview_sat">Sa</string>
+    <string name="detailview_checkbox_textview_sun">Su</string>
     <string name="splashscreen_imageview_content">Spash Screen Application Picrure</string>
     <string name="listview_addbutton">+</string>
     
