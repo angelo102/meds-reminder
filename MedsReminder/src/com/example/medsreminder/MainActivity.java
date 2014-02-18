@@ -14,7 +14,6 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		
 	}
 
 	@Override
@@ -28,24 +27,8 @@ public class MainActivity extends Activity {
 	
 	public void sendMessage(View view){
 		
-	/*
-		Alarm al = new Alarm();
-		al.setMedName("Panadol");
-		al.serializeClass(view.getContext());
-		
-		Alarm al2 = new Alarm();
-		
-		al2 = al2.loadSerializedClass(view.getContext());
-		
-		Button bt = (Button)findViewById(R.id.button1);
-		bt.setText(al2.getMedName());
-		*/
-		
 		Intent intent = new Intent(this,ListViewActivity.class);
-		//intent.putExtra(EXTRA_MESSAGE, message);
 		startActivity(intent);
-		
-		
 	}
 	
 }

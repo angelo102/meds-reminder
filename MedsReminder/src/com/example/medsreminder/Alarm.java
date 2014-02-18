@@ -15,10 +15,8 @@ public class Alarm implements Serializable{
 	private static final long serialVersionUID = 1L;
 	public final static String SERIALIZED_FILENAME ="alarms.bin";
 	
-	
-	//private boolean[] days = new boolean[7];
-	private String medName = "";
-	private String medDesciption = "";
+	private String medName;
+	private String medDesciption;
 	private Date initialDate;
 	private Time initialTime;
 	private boolean monRepeat;
@@ -32,18 +30,6 @@ public class Alarm implements Serializable{
 	private int minutesInterval;
 	private int dose;
 	
-	//private static final 
-
-	/*
-	public boolean[] getDays() {
-		return days;
-	}
-
-	public void setDays(boolean[] days) {
-		this.days = days;
-	}
-	
-	*/
 
 	public String getMedName() {
 		return medName;
@@ -93,52 +79,6 @@ public class Alarm implements Serializable{
 		this.minutesInterval = minutesInterval;
 	}
 	
-	
-	public void serializeClass(Context c){
-		
-		try {
-			
-			FileOutputStream fos = c.openFileOutput(SERIALIZED_FILENAME,Context.MODE_PRIVATE);
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			
-			oos.writeObject(this);
-			
-			oos.flush();
-			oos.close();
-			
-			fos.close();
-		
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-	
-	public Alarm loadSerializedClass(Context c){
-		
-		Alarm alarm = new Alarm();
-		
-		try {
-			FileInputStream fis = c.openFileInput(SERIALIZED_FILENAME);
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			
-			alarm = (Alarm)ois.readObject();
-			
-			ois.close();
-			
-			fis.close();
-			
-		} 
-		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return alarm;
-		
-	}
-
 	public int getDose() {
 		return dose;
 	}
@@ -203,6 +143,54 @@ public class Alarm implements Serializable{
 		this.sunRepeat = sunRepeat;
 	}
 
+	
+	
+	public void serializeClass(Context c){
+		
+		try {
+			
+			FileOutputStream fos = c.openFileOutput(SERIALIZED_FILENAME,Context.MODE_PRIVATE);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			
+			oos.writeObject(this);
+			
+			oos.flush();
+			oos.close();
+			
+			fos.close();
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public Alarm loadSerializedClass(Context c){
+		
+		Alarm alarm = new Alarm();
+		
+		try {
+			FileInputStream fis = c.openFileInput(SERIALIZED_FILENAME);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			
+			alarm = (Alarm)ois.readObject();
+			
+			ois.close();
+			
+			fis.close();
+			
+		} 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return alarm;
+		
+	}
+
+	
 	
 }
 

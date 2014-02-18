@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -32,13 +33,14 @@ public class MedDetailActivity extends Activity {
 	CheckBox chkBoxSun;
 	EditText editTextHourInterval;
 	EditText editTextMinuteInterval;
+	NumberPicker np;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_med_detail);
-		
+	
 		this.loadMedicine();
 	}
 
@@ -197,11 +199,22 @@ public class MedDetailActivity extends Activity {
 			name = ((EditText)findViewById(R.id.editTextName)).getText().toString();                                                                       
 			desc = ((EditText)findViewById(R.id.editTextDesc)).getText().toString();                                                                       
 			dose = Integer.parseInt(((EditText)findViewById(R.id.editTextDose)).getText().toString());
+			hrInterval = Integer.parseInt(((EditText)findViewById(R.id.editTextHourInterval)).getText().toString());
+			minInterval = Integer.parseInt(((EditText)findViewById(R.id.editTextMinunteInterval)).getText().toString());
 			
 			//Check empty values or 0 values
-			if(name.trim().equals("") || desc.trim().equals("") || dose==0 ){
+			if(name.trim().equals("") || desc.trim().equals("") ){
 				AlertDialog alert=new AlertDialog.Builder(MedDetailActivity.this).create();                                                                 
 				alert.setMessage("Values cannot be empty or 0");                                                                                           
+				alert.show();      
+				return false;
+			}
+			
+			//Check numeric values are positive	
+			if(dose < 1 || hrInterval < 1 || minInterval < 1)
+			{
+				AlertDialog alert=new AlertDialog.Builder(MedDetailActivity.this).create();                                                                 
+				alert.setMessage("Numeric values should be positive");                                                                                           
 				alert.show();      
 				return false;
 			}
@@ -209,7 +222,7 @@ public class MedDetailActivity extends Activity {
 		}
 		catch(Exception e){
 			AlertDialog alert=new AlertDialog.Builder(MedDetailActivity.this).create();                                                                 
-			alert.setMessage("Non-numeric value for dose or interval");                                                                                           
+			alert.setMessage("Non-numeric value for dose or intervals");                                                                                           
 			alert.show();      
 			return false;
 		}
