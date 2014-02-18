@@ -93,6 +93,7 @@ public class MedDetailActivity extends Activity {
 
 				//Save depending if is a new alarm or an existing alarm
 				String alarmId = getIntent().getStringExtra(ListViewActivity.EXTRA_ALARM_ID);
+				
 				if(alarmId.equals("NEW ALARM"))
 					alarmManager.AddAlarm(al);
 				else
