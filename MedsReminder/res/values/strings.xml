@@ -8,5 +8,7 @@
     <string name="team_name">Take Your Meds!!! by Team 2 CSE5324</string>
     <string name="title_activity_list_view">ListViewActivity</string>
     <string name="title_activity_med_detail">MedDetailActivity</string>
+    <string name="textview_name">Name: </string>
+    <string name="textview_desc">Description: </string>
 
 </resources>
