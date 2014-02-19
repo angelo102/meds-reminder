@@ -3,9 +3,8 @@
     android:id="@+id/LinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    
     tools:context=".MedDetailActivity" >
-    
+
     <ScrollView
         android:id="@+id/scrollLayout"
         android:layout_width="match_parent"
@@ -15,12 +14,13 @@
         android:scrollbarStyle="outsideInset"
         android:scrollbars="vertical" >
 
-        <TableLayout
+      <TableLayout
             android:id="@+id/tableLayout"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content" >
 
             <TableRow>
+
                 <TextView
                     android:id="@+id/textViewName"
                     android:layout_width="wrap_content"
@@ -32,8 +32,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="text"
-                   >
+                    android:inputType="text" >
+
                     <requestFocus />
                 </EditText>
             </TableRow>
@@ -44,14 +44,14 @@
                     android:id="@+id/textViewDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="left|center"
                     android:text="@string/detailview_textview_desc" />
 
                 <EditText
                     android:id="@+id/editTextDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    />
+                    android:inputType="text" />
             </TableRow>
 
             <TableRow>
@@ -60,6 +60,7 @@
                     android:id="@+id/textViewDose"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="left|center"
                     android:text="@string/detailview_textview_dose" />
 
                 <EditText
@@ -68,135 +69,152 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="number" />
-
             </TableRow>
+
             <TableRow>
+
                 <TextView
                     android:id="@+id/textViewDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="0dp"
+                    android:layout_gravity="left|center"
                     android:text="@string/detailview_textview_date" />
-                
+
                 <DatePicker
                     android:id="@+id/datePicker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
                     android:calendarViewShown="false" />
             </TableRow>
+
             <TableRow>
+
                 <TextView
                     android:id="@+id/textViewTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="left|center"
                     android:text="@string/detailview_textview_time" />
 
                 <TimePicker
                     android:id="@+id/timePicker"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content" 
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="2.5dp"/>
             </TableRow>
-			<TableRow>
-				    <CheckBox
-				        android:id="@+id/chkBoxMon"
-				        android:layout_width="0dip"
-				        android:layout_weight="1"
-				        android:textSize="12sp"
-				        android:text="@string/detailview_checkbox_textview_mon" />
-			
-				    <CheckBox
-				        android:id="@+id/chkBoxTue"
-				        android:layout_width="0dip"
-				        android:layout_weight="1"
-				        android:textSize="12sp"
-				        android:text="@string/detailview_checkbox_textview_tue" />
-			
-				    <CheckBox 
-				        android:id="@+id/chkBoxWed"
-				        android:layout_width="0dip"
-				        android:layout_weight="1"
-				        android:textSize="12sp"
-	                    android:text="@string/detailview_checkbox_textview_wed"
-	                    />
-			
-				    <CheckBox 
-				        android:id="@+id/chkBoxThu"
-				        android:layout_width="0dip"
-				        android:layout_weight="1"
-				        android:textSize="12sp"
-	                    android:text="@string/detailview_checkbox_textview_thr"
-	                    />
-			
-				    <CheckBox
-				        android:id="@+id/chkBoxFri"
-				        android:layout_width="0dip"
-				        android:layout_weight="1"
-				        android:textSize="12sp"
-				        android:text="@string/detailview_checkbox_textview_fri" />
-			
-				    <CheckBox 
-				        android:id="@+id/chkBoxSat"
-				        android:layout_width="0dip"
-				        android:layout_weight="1"
-				        android:textSize="12sp"
-	                    android:text="@string/detailview_checkbox_textview_sat" />
-			    
-				    <CheckBox 
-				        android:id="@+id/chkBoxSun"
-				       	android:layout_width="0dip"
-				        android:layout_weight="1"
-				        android:textSize="12sp"
-	                    android:text="@string/detailview_checkbox_textview_sun" />
-			</TableRow>	
+
             <TableRow>
+
+                <CheckBox
+                    android:id="@+id/chkBoxMon"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/detailview_checkbox_textview_mon"
+                    android:textSize="12sp" />
+
+                <CheckBox
+                    android:id="@+id/chkBoxTue"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/detailview_checkbox_textview_tue"
+                    android:textSize="12sp" />
+
+                <CheckBox
+                    android:id="@+id/chkBoxWed"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/detailview_checkbox_textview_wed"
+                    android:textSize="12sp" />
+
+                <CheckBox
+                    android:id="@+id/chkBoxThu"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/detailview_checkbox_textview_thr"
+                    android:textSize="12sp" />
+
+                <CheckBox
+                    android:id="@+id/chkBoxFri"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/detailview_checkbox_textview_fri"
+                    android:textSize="12sp" />
+
+                <CheckBox
+                    android:id="@+id/chkBoxSat"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/detailview_checkbox_textview_sat"
+                    android:textSize="12sp" />
+
+                <CheckBox
+                    android:id="@+id/chkBoxSun"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/detailview_checkbox_textview_sun"
+                    android:textSize="12sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="25dp">
+
                 <TextView
                     android:id="@+id/textViewHourInterval"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="left|center"
                     android:text="@string/detailview_textview_hinterval" />
 
                 <EditText
                     android:id="@+id/editTextHourInterval"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10" 
-                    android:inputType="number"/>
+                    android:ems="10"
+                    android:inputType="number" />
             </TableRow>
+
             <TableRow>
+
                 <TextView
                     android:id="@+id/textViewMinuteInterval"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/detailview_textview_minterval"
-                     />
+                    android:layout_gravity="left|center"
+                    android:text="@string/detailview_textview_minterval" />
 
                 <EditText
                     android:id="@+id/editTextMinunteInterval"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10" 
-                    android:inputType="number"
-                    />
-             </TableRow>
-              
-            <TableRow >
-                <Button 
-        			android:layout_height="wrap_content"
-        			android:layout_width="0dp"
-        			android:layout_weight="1"
-        			android:text="@string/detailview_button_save" 
-        			android:onClick="saveMethod" />
-                
+                    android:ems="10"
+                    android:inputType="number" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="25dp">
+
                 <Button
-        			android:layout_height="wrap_content"
-        			android:layout_width="0dp"
-        			android:layout_weight="1"
-        			android:text="@string/detailview_button_cancel" 
-        			android:onClick="cancelMethod" />
-              
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:onClick="saveMethod"
+                    android:text="@string/detailview_button_save" />
+
+                <Button
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:onClick="cancelMethod"
+                    android:text="@string/detailview_button_cancel" />
             </TableRow>
         </TableLayout>
-</ScrollView>
+    </ScrollView>
 
 </LinearLayout>

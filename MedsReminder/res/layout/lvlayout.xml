@@ -16,6 +16,6 @@
         android:layout_gravity="center_horizontal"
         android:text="@string/listview_addbutton" 
         android:onClick="addNewAlarm" 
-        android:id="@+id/addMedButton" />
- take_meds_pic1Take your Meds (Medicine Reminder)
+        android:id="@+id/addMedButton"
+        style="@style/btnStyleArsenic" />
 </LinearLayout>

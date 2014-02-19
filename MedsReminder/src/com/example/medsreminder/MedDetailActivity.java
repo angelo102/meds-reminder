@@ -51,6 +51,14 @@ public class MedDetailActivity extends Activity {
 		return true;
 	}
 	
+	//Handle back button as cancel to mantain application functionality
+	@Override
+	public void onBackPressed() {
+		//Return to ListView Activity
+		Intent intent = new Intent(this,ListViewActivity.class);
+		startActivity(intent);
+	}
+	
 	public void saveMethod(View view){
 
 		try{
