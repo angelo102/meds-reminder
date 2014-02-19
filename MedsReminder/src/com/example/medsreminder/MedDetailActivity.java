@@ -209,7 +209,7 @@ public class MedDetailActivity extends Activity {
 			//Check empty values or 0 values
 			if(name.trim().equals("") || desc.trim().equals("") ){
 				AlertDialog alert=new AlertDialog.Builder(MedDetailActivity.this).create();                                                                 
-				alert.setMessage("Values cannot be empty or 0");                                                                                           
+				alert.setMessage(" Medicine name and/or description cannot be empty");                                                                                           
 				alert.show();      
 				return false;
 			}
@@ -218,7 +218,7 @@ public class MedDetailActivity extends Activity {
 			if(dose < 1 )
 			{
 				AlertDialog alert=new AlertDialog.Builder(MedDetailActivity.this).create();                                                                 
-				alert.setMessage("Dose should be greater than 0Numeric values should be positive");                                                                                           
+				alert.setMessage("Dose should be greater than 0");                                                                                           
 				alert.show();      
 				return false;
 			}
