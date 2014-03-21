@@ -1,10 +1,14 @@
 package com.example.medsreminder;
 
+import java.io.File;
 import java.util.Date;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -34,6 +38,10 @@ public class MedDetailActivity extends Activity {
 	EditText editTextHourInterval;
 	EditText editTextMinuteInterval;
 	NumberPicker np;
+	
+	//Camera Functionality
+	static final int REQUEST_IMAGE_CAPTURE = 1;
+	static final int REQUEST_TAKE_PHOTO = 1;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -250,4 +258,42 @@ public class MedDetailActivity extends Activity {
 		
 		return true;
 	}
+	
+	//Camera Functionality
+	public void sendMessage(View view){
+		
+		/*
+		final CharSequence[] items = { "Take Photo", "Choose from Library","Cancel" };
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(MedDetailActivity.this);
+		builder.setTitle("Add Photo!");
+		builder.setItems(items, new DialogInterface.OnClickListener() {
+		    @Override
+		    public void onClick(DialogInterface dialog, int item) {
+		        if (items[item].equals("Take Photo")) {
+		            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		            File f = new File(android.os.Environment
+		                    .getExternalStorageDirectory(), "temp.jpg");
+		            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+		            startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+		        } else if (items[item].equals("Choose from Library")) {
+		            Intent intent = new Intent(
+		                    Intent.ACTION_PICK,
+		                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+		            intent.setType("image/*");
+		            //startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_FILE);
+		        } else if (items[item].equals("Cancel")) {
+		            dialog.dismiss();
+		        }
+		    }
+		});
+		builder.show();
+		
+		*/
+		PhotoManager pm = new PhotoManager(view.getContext());
+		pm.ChooseOption();
+		//startActivityForResult(pm.dialogIntent, REQUEST_IMAGE_CAPTURE);
+	}
+	
+	
 }
