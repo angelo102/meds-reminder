@@ -279,7 +279,7 @@ public class MedDetailActivity extends Activity {
 		h="555";
 		if (requestCode == PhotoManager.REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 
-            imageViewMedicine.setImageBitmap(photoManager.GetBitmap(imageViewMedicine.getWidth(), imageViewMedicine.getHeight()));            
+            imageViewMedicine.setImageBitmap(photoManager.GetBitmap(IMAGE_VIEW_WIDTH, IMAGE_VIEW_HEIGHT));            
             photoManager.ForceMediaScanner(this);
         }
 		else if(requestCode == PhotoManager.SELECT_FILE && resultCode == RESULT_OK) {
@@ -288,7 +288,7 @@ public class MedDetailActivity extends Activity {
 			String absolutePath = photoManager.GetImageAbsolutePath(this, data.getData());
 			photoManager.setPhotoPath(absolutePath);
 			
-			imageViewMedicine.setImageBitmap(photoManager.GetBitmap(imageViewMedicine.getWidth(), imageViewMedicine.getHeight()));
+			imageViewMedicine.setImageBitmap(photoManager.GetBitmap(IMAGE_VIEW_WIDTH, IMAGE_VIEW_HEIGHT));
 			
 		}
 		

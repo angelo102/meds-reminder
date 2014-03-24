@@ -120,11 +120,18 @@
                 
                 <ImageView
                     android:id="@+id/imageViewMedicine"
-                    android:src="@drawable/ic_launcher"
                     android:layout_width="wrap_content"
                     android:layout_gravity="left|center"
+                    android:layout_marginLeft="7.5dp"
                     android:gravity="center_horizontal|center_vertical"
-                	android:layout_marginLeft="8.5dp" />
+                    android:src="@drawable/ic_launcher" 
+                    
+                    android:background="#ff33b5e5"
+			        android:paddingLeft="6px"
+			        android:paddingTop="4px"
+			        android:paddingRight="8px"
+			        android:paddingBottom="9px"/>
+
                    <!--  android:layout_height="wrap_content" -->
                    
             </TableRow>
