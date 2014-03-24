@@ -1,20 +1,18 @@
 package com.example.medsreminder;
 
-import java.io.File;
 import java.util.Date;
-
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -22,6 +20,10 @@ import android.widget.Toast;
 public class MedDetailActivity extends Activity {
 	
 	private AlarmManager alarmManager;
+	private PhotoManager photoManager; 
+	
+	private static final int IMAGE_VIEW_WIDTH = 254;//382;//254*2;
+	private static final int IMAGE_VIEW_HEIGHT = 96;//144;//96*2;
 	
 	EditText editTextName;
 	EditText editTextDesc;
@@ -38,10 +40,7 @@ public class MedDetailActivity extends Activity {
 	EditText editTextHourInterval;
 	EditText editTextMinuteInterval;
 	NumberPicker np;
-	
-	//Camera Functionality
-	static final int REQUEST_IMAGE_CAPTURE = 1;
-	static final int REQUEST_TAKE_PHOTO = 1;
+	ImageView imageViewMedicine;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +75,7 @@ public class MedDetailActivity extends Activity {
 
 				alarmManager = new AlarmManager();
 				alarmManager = alarmManager.loadSerializedClass(getApplicationContext());
-
+				
 				Alarm al = new Alarm();
 
 				al.setMedName(editTextName.getText().toString());
@@ -108,6 +107,8 @@ public class MedDetailActivity extends Activity {
 
 				int minuteInterval = Integer.parseInt(editTextMinuteInterval.getText().toString());
 				al.setMinutesInterval(minuteInterval);
+				
+				al.setImagePath(photoManager.getPhotoPath());
 
 				//Save depending if is a new alarm or an existing alarm
 				String alarmId = getIntent().getStringExtra(ListViewActivity.EXTRA_ALARM_ID);
@@ -179,6 +180,10 @@ public class MedDetailActivity extends Activity {
 				chkBoxSun.setChecked(alarm.isSunRepeat());
 				editTextHourInterval.setText(String.valueOf(alarm.getHourInterval()));
 				editTextMinuteInterval.setText(String.valueOf(alarm.getMinutesInterval()));
+				
+				photoManager = new PhotoManager();
+				photoManager.setPhotoPath(alarm.getImagePath());
+				imageViewMedicine.setImageBitmap(photoManager.GetBitmap(IMAGE_VIEW_WIDTH, IMAGE_VIEW_HEIGHT));
 
 				Toast.makeText(this, "Existing Alarm", Toast.LENGTH_LONG).show();
 			}
@@ -189,7 +194,6 @@ public class MedDetailActivity extends Activity {
 			alert.show();      
 
 		}
-
 	}
 	
 	private void GetControls(){
@@ -208,6 +212,7 @@ public class MedDetailActivity extends Activity {
 		chkBoxSun = (CheckBox)findViewById(R.id.chkBoxSun);
 		editTextHourInterval = (EditText)findViewById(R.id.editTextHourInterval);
 		editTextMinuteInterval = (EditText)findViewById(R.id.editTextMinunteInterval);
+		imageViewMedicine = (ImageView)findViewById(R.id.imageViewMedicine);
 	}
 	
 	private boolean ValidateFields(){   
@@ -260,40 +265,34 @@ public class MedDetailActivity extends Activity {
 	}
 	
 	//Camera Functionality
-	public void sendMessage(View view){
+	public void selectImage(View view){
 		
-		/*
-		final CharSequence[] items = { "Take Photo", "Choose from Library","Cancel" };
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(MedDetailActivity.this);
-		builder.setTitle("Add Photo!");
-		builder.setItems(items, new DialogInterface.OnClickListener() {
-		    @Override
-		    public void onClick(DialogInterface dialog, int item) {
-		        if (items[item].equals("Take Photo")) {
-		            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		            File f = new File(android.os.Environment
-		                    .getExternalStorageDirectory(), "temp.jpg");
-		            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
-		            startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
-		        } else if (items[item].equals("Choose from Library")) {
-		            Intent intent = new Intent(
-		                    Intent.ACTION_PICK,
-		                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-		            intent.setType("image/*");
-		            //startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_FILE);
-		        } else if (items[item].equals("Cancel")) {
-		            dialog.dismiss();
-		        }
-		    }
-		});
-		builder.show();
-		
-		*/
-		PhotoManager pm = new PhotoManager(view.getContext());
-		pm.ChooseOption();
-		//startActivityForResult(pm.dialogIntent, REQUEST_IMAGE_CAPTURE);
+		photoManager = new PhotoManager();
+		photoManager.show(getFragmentManager(), "photo_manager");
 	}
+	
+	//Needed to run onActivityResult on DialogFragment Class
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        String h = "Ddd";
+		h="555";
+		if (requestCode == PhotoManager.REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+
+            imageViewMedicine.setImageBitmap(photoManager.GetBitmap(imageViewMedicine.getWidth(), imageViewMedicine.getHeight()));            
+            photoManager.ForceMediaScanner(this);
+        }
+		else if(requestCode == PhotoManager.SELECT_FILE && resultCode == RESULT_OK) {
+			
+			//photoManager.setPhotoFileUri(data.getData().);
+			String absolutePath = photoManager.GetImageAbsolutePath(this, data.getData());
+			photoManager.setPhotoPath(absolutePath);
+			
+			imageViewMedicine.setImageBitmap(photoManager.GetBitmap(imageViewMedicine.getWidth(), imageViewMedicine.getHeight()));
+			
+		}
+		
+    }
 	
 	
 }

@@ -85,7 +85,7 @@
                     android:id="@+id/datePicker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
+                    android:layout_gravity="left|center"
                     android:calendarViewShown="false" />
             </TableRow>
 
@@ -102,29 +102,45 @@
                     android:id="@+id/timePicker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" 
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="2.5dp"/>
+                    android:layout_gravity="left|center"/>
+                   <!--   android:layout_marginLeft="2.5dp" -->
             </TableRow>
 
-            <TableRow>
+            <TableRow
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+            		>
                 
-                <Button
-                    android:id="@+id/button1"
+                <TextView
+                    android:id="@+id/textViewTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="sendMessage"
-                    android:text="Photo" />
-			</TableRow>
-			
-            <TableRow>
+                    android:layout_gravity="left|center"
+                    android:text="Image:" />
+                
                 <ImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/imageViewMedicine"
+                    android:src="@drawable/ic_launcher"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_launcher" />
-                
+                    android:layout_gravity="left|center"
+                    android:gravity="center_horizontal|center_vertical"
+                	android:layout_marginLeft="8.5dp" />
+                   <!--  android:layout_height="wrap_content" -->
+                   
             </TableRow>
             
+            <TableRow
+                 android:gravity="center_horizontal|center_vertical"
+                 android:layout_marginBottom="10dp">
+                 
+                <Button
+                    android:id="@+id/btnSelectImage"
+                    style="@style/btnStyleArsenic"
+                    android:onClick="selectImage"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Choose Image" />
+			</TableRow>
+			
             <TableRow>
 
                 <CheckBox

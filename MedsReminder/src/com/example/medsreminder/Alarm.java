@@ -29,6 +29,7 @@ public class Alarm implements Serializable{
 	private int hourInterval;
 	private int minutesInterval;
 	private int dose;
+	private String imagePath;
 	
 
 	public String getMedName() {
@@ -142,6 +143,14 @@ public class Alarm implements Serializable{
 	public void setSunRepeat(boolean sunRepeat) {
 		this.sunRepeat = sunRepeat;
 	}
+	
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
 
 	
 	
@@ -190,8 +199,6 @@ public class Alarm implements Serializable{
 		
 	}
 
-	
-	
 }
 
 

@@ -5,15 +5,25 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
+import android.widget.Toast;
 
-public class PhotoManager extends Activity {
+public class PhotoManager extends DialogFragment{
 	
 	private String photoPath;
 	
@@ -23,15 +33,22 @@ public class PhotoManager extends Activity {
 	public final static String DIALOG_TITLE ="ADD PHOTO!";
 	//Needed for Photo
 	static final int REQUEST_IMAGE_CAPTURE = 1;
-	//For Dialog Intent
-	public Intent dialogIntent;
+	static final int SELECT_FILE = 2;
+	
+	private File photoFile;
+	private Uri photoFileUri;
+	
+	public enum PhotoOptions{
+		TAKE_PICTURE,
+		CHOOSE_FROM_LIBRARY,
+		CANCEL
+	}
+	
+	private PhotoOptions optionSelected;
 	
 	Context innerContext;
 	
-	public PhotoManager(Context context){
-		this.innerContext = context;
-	}
-
+	
 	public String getPhotoPath() {
 		return photoPath;
 	}
@@ -40,52 +57,102 @@ public class PhotoManager extends Activity {
 		this.photoPath = photoPath;
 	}
 	
-	public void ChooseOption(){
-		try{
+	public PhotoOptions getOptionSelected() {
+		return optionSelected;
+	}
 
+	public void setOptionSelected(PhotoOptions optionSelected) {
+		this.optionSelected = optionSelected;
+	}
+	
+	public File getPhotoFile() {
+		return photoFile;
+	}
 
-			AlertDialog.Builder builder = new AlertDialog.Builder(this.innerContext);
-			builder.setTitle(DIALOG_TITLE);
-			builder.setItems(dialogItems, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int item) {
-					try{
-						if (dialogItems[item].equals("Take Photo")) {
-							dialogIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-							//File f = new File(android.os.Environment
-							//        .getExternalStorageDirectory(), "temp.jpg");
+	public void setPhotoFile(File photoFile) {
+		this.photoFile = photoFile;
+	}
 
-							File file = createImageFile(innerContext);
+	public Uri getPhotoFileUri() {
+		return photoFileUri;
+	}
 
-							dialogIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-							try {
-								startActivityForResult(dialogIntent, REQUEST_IMAGE_CAPTURE);
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
+	public void setPhotoFileUri(Uri photoFileUri) {
+		this.photoFileUri = photoFileUri;
+	}
+	
+	@Override
+	public Dialog onCreateDialog(Bundle savedInstanceState){
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setTitle(DIALOG_TITLE);
+		builder.setItems(dialogItems, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int item) {
+				try{
+					if (dialogItems[item].equals("Take Photo")) {
 
-						} else if (dialogItems[item].equals("Choose from Library")) {
-							Intent intent = new Intent(
-									Intent.ACTION_PICK,
-									android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-							intent.setType("image/*");
-							//startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_FILE);
-						} else if (dialogItems[item].equals("Cancel")) {
-							dialog.dismiss();
-						}
-					}
-					catch(Exception e){
-						String s = e.getMessage();
+						//File file = createImageFile(innerContext);
+						photoFile = createImageFile(getActivity());
+						Intent dialogIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+						dialogIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+						dialogIntent.putExtra("PHOTO_PATH", photoPath);
+						
+						getActivity().startActivityForResult(dialogIntent, REQUEST_IMAGE_CAPTURE);
+						
+						//} catch (Exception e) {
+						// TODO Auto-generated catch block
+						//	e.printStackTrace();
+						//}
 
+						//set the file to be used by camera activity
+						//photoFile = createImageFile(getActivity());
+						//optionSelected = PhotoOptions.TAKE_PICTURE;
+						//Uri.fromFile(photoFile);
+
+					} else if (dialogItems[item].equals("Choose from Library")) {
+						
+						//Refresh app directory with media scanner
+		
+						
+						//File f = getActivity().getExternalFilesDir(null);
+						File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),"MedsReminders");
+						Intent intent = new Intent(); 
+						intent.setAction(android.content.Intent.ACTION_PICK); 
+						intent.setDataAndType(Uri.fromFile(f), "image/*"); 
+						//startActivity(intent);
+						
+						//Uri uri = Uri.parse(getActivity().getExternalFilesDir(null).getPath());
+						//Intent intent = new Intent(Intent.ACTION_PICK,uri);
+							
+						//intent.setType("image/*");
+						getActivity().startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_FILE);
+						
+						optionSelected = PhotoOptions.CHOOSE_FROM_LIBRARY;
+					} else if (dialogItems[item].equals("Cancel")) {
+						dialog.dismiss();
 					}
 				}
-			});
-			builder.show();
-		}
-		catch(Exception e){
-			String s = e.getMessage();
-		}
+				catch(Exception e){
+					String s = e.getMessage();
+
+				}
+			}
+		});
+		//builder.show();
+		return builder.create();
+
+		
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		//Never got here
+		String ss = "4444";
+	    if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == android.app.Activity.RESULT_OK) {
+	    	Toast.makeText(getActivity(), "Existing Alarm", Toast.LENGTH_LONG).show();
+	    }
 	}
 	
 	private File createImageFile(Context context) throws IOException{
@@ -95,8 +162,14 @@ public class PhotoManager extends Activity {
 		String imageFileName = "JPEG_" + timeStamp + "_";
 
 
-		File storageDir = innerContext.getExternalFilesDir(null);
-
+		//File storageDir = context.getExternalFilesDir(null);
+		
+		File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),"MedsReminders");
+		
+		//Check directory has been created
+		if (!storageDir.mkdirs()) {
+	        Log.e("Log dir", "Directory not created");
+	    }
 		File image = File.createTempFile(
 				imageFileName,  /* prefix */
 				".jpg",         /* suffix */
@@ -105,7 +178,63 @@ public class PhotoManager extends Activity {
 
 		// Save a file: path for use with ACTION_VIEW intents
 		this.photoPath = image.getAbsolutePath();
+		this.photoFileUri = Uri.fromFile(image);
 		return image;
 		
 	}
+	
+	public Bitmap GetBitmap(int imageViewWidth, int imageViewHeight){
+		// Get the dimensions of the View
+        int targetW = imageViewWidth;//imageViewMedicine.getWidth();
+        int targetH = imageViewHeight;//imageViewMedicine.getHeight();
+
+        // Get the dimensions of the bitmap
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(getPhotoPath(), bmOptions);
+        int photoW = bmOptions.outWidth;
+        int photoH = bmOptions.outHeight;
+
+        // Determine how much to scale down the image
+        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
+
+        // Decode the image file into a Bitmap sized to fill the View
+        bmOptions.inJustDecodeBounds = false;
+        bmOptions.inSampleSize = scaleFactor;
+        bmOptions.inPurgeable = true;
+
+        Bitmap bitmap = BitmapFactory.decodeFile(getPhotoPath(), bmOptions);
+        
+        return bitmap;
+	}
+	
+	public String GetImageAbsolutePath(Context context, Uri uri){
+		
+		String[] proj = { MediaStore.Images.Media.DATA };
+		CursorLoader loader = new CursorLoader(context, uri, proj, null, null, null);
+		Cursor cursor = loader.loadInBackground();
+		int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+		cursor.moveToFirst();
+		return cursor.getString(column_index);
+		
+	}
+	
+	public void ForceMediaScanner(Context context){
+	
+		Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+		//String mCurrentPhotoPath = "file:" + this.photoPath; // image is the created file image
+		//File file = new File(mCurrentPhotoPath);
+		//Uri contentUri = Uri.fromFile(file);
+		mediaScanIntent.setData(this.photoFileUri);
+		context.sendBroadcast(mediaScanIntent);
+		
+	}
+
+	
+
+	
+
+	
+
+	
 }
