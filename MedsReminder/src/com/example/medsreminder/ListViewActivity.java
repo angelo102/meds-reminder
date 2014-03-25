@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ListViewActivity extends ListActivity {
@@ -23,8 +26,11 @@ public class ListViewActivity extends ListActivity {
 		String [] values = alarmManager.GetAlarmNames();
 		
 		//Display alarms on Listview via adapter
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, values);
-		setListAdapter(adapter);
+		//ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, values);
+		//setListAdapter(adapter);
+		
+		CustomMedArrayAdapter adapter = new CustomMedArrayAdapter(this, values);
+	    setListAdapter(adapter);
 		
 		setContentView(R.layout.lvlayout);
 		
@@ -53,11 +59,36 @@ public class ListViewActivity extends ListActivity {
 	  }
 	
 	public void addNewAlarm(View view){
-		
+
 		//Open MedDetail Activity to Add a new alarm
 		Intent intent = new Intent(this,MedDetailActivity.class);
 		intent.putExtra(EXTRA_ALARM_ID, "NEW ALARM");
 		startActivity(intent);
-		
-		}
+
+	}
+	
+	public void deleteAlarm(View v) 
+    {
+          
+        //reset all the listView items background colours 
+        //before we set the clicked one..
+        ListView lvItems = getListView();
+        //for (int i=0; i < lvItems.getChildCount(); i++) 
+        //{
+        //    lvItems.getChildAt(i).setBackgroundColor(Color.BLUE);        
+        //}
+        
+        //get the row the clicked button is in
+        LinearLayout vwParentRow = (LinearLayout)v.getParent();
+         
+        //TextView child = (TextView)vwParentRow.getChildAt(0);
+        Button btnChild = (Button)vwParentRow.getChildAt(1);
+       // btnChild.setText(child.getText());
+        btnChild.setText("I've been clicked!");
+        
+        //int c = Color.CYAN;
+        
+        //vwParentRow.setBackgroundColor(c); 
+        //vwParentRow.refreshDrawableState();       
+    }
 }
