@@ -152,8 +152,6 @@ public class Alarm implements Serializable{
 		this.imagePath = imagePath;
 	}
 
-	
-	
 	public void serializeClass(Context c){
 		
 		try {

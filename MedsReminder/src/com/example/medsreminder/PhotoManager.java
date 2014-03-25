@@ -92,54 +92,33 @@ public class PhotoManager extends DialogFragment{
 				try{
 					if (dialogItems[item].equals("Take Photo")) {
 
-						//File file = createImageFile(innerContext);
 						photoFile = createImageFile(getActivity());
 						Intent dialogIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 						dialogIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
 						dialogIntent.putExtra("PHOTO_PATH", photoPath);
 						
+						//Starts camera activity
 						getActivity().startActivityForResult(dialogIntent, REQUEST_IMAGE_CAPTURE);
 						
-						//} catch (Exception e) {
-						// TODO Auto-generated catch block
-						//	e.printStackTrace();
-						//}
-
-						//set the file to be used by camera activity
-						//photoFile = createImageFile(getActivity());
-						//optionSelected = PhotoOptions.TAKE_PICTURE;
-						//Uri.fromFile(photoFile);
-
 					} else if (dialogItems[item].equals("Choose from Library")) {
 						
-						//Refresh app directory with media scanner
-		
-						
-						//File f = getActivity().getExternalFilesDir(null);
 						File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),"MedsReminders");
 						Intent intent = new Intent(); 
 						intent.setAction(android.content.Intent.ACTION_PICK); 
 						intent.setDataAndType(Uri.fromFile(f), "image/*"); 
-						//startActivity(intent);
 						
-						//Uri uri = Uri.parse(getActivity().getExternalFilesDir(null).getPath());
-						//Intent intent = new Intent(Intent.ACTION_PICK,uri);
-							
-						//intent.setType("image/*");
+						//Starts image chooser activity
 						getActivity().startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_FILE);
 						
-						optionSelected = PhotoOptions.CHOOSE_FROM_LIBRARY;
 					} else if (dialogItems[item].equals("Cancel")) {
 						dialog.dismiss();
 					}
 				}
 				catch(Exception e){
 					String s = e.getMessage();
-
 				}
 			}
 		});
-		//builder.show();
 		return builder.create();
 
 		
@@ -148,11 +127,8 @@ public class PhotoManager extends DialogFragment{
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		//Never got here
-		String ss = "4444";
-	    if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == android.app.Activity.RESULT_OK) {
-	    	Toast.makeText(getActivity(), "Existing Alarm", Toast.LENGTH_LONG).show();
-	    }
+		//Never reached here
+		
 	}
 	
 	private File createImageFile(Context context) throws IOException{
@@ -161,29 +137,27 @@ public class PhotoManager extends DialogFragment{
 		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 		String imageFileName = "JPEG_" + timeStamp + "_";
 
-
-		//File storageDir = context.getExternalFilesDir(null);
-		
 		File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),"MedsReminders");
 		
 		//Check directory has been created
 		if (!storageDir.mkdirs()) {
 	        Log.e("Log dir", "Directory not created");
 	    }
-		File image = File.createTempFile(
+		File imageFile = File.createTempFile(
 				imageFileName,  /* prefix */
 				".jpg",         /* suffix */
 				storageDir      /* directory */
 				);
 
-		// Save a file: path for use with ACTION_VIEW intents
-		this.photoPath = image.getAbsolutePath();
-		this.photoFileUri = Uri.fromFile(image);
-		return image;
+		this.photoPath = imageFile.getAbsolutePath();
+		this.photoFileUri = Uri.fromFile(imageFile);
+		return imageFile;
 		
 	}
 	
+	//Returns a decoded version of the image
 	public Bitmap GetBitmap(int imageViewWidth, int imageViewHeight){
+		
 		// Get the dimensions of the View
         int targetW = imageViewWidth;//imageViewMedicine.getWidth();
         int targetH = imageViewHeight;//imageViewMedicine.getHeight();
@@ -219,22 +193,12 @@ public class PhotoManager extends DialogFragment{
 		
 	}
 	
+	//Forces media scanner to add newly taken images
 	public void ForceMediaScanner(Context context){
 	
 		Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-		//String mCurrentPhotoPath = "file:" + this.photoPath; // image is the created file image
-		//File file = new File(mCurrentPhotoPath);
-		//Uri contentUri = Uri.fromFile(file);
 		mediaScanIntent.setData(this.photoFileUri);
 		context.sendBroadcast(mediaScanIntent);
 		
 	}
-
-	
-
-	
-
-	
-
-	
 }

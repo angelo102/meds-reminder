@@ -12,7 +12,6 @@ import android.content.Context;
 
 public class AlarmManager implements Serializable {
 	
-	
 	private static final long serialVersionUID = 1L;
 	public final static String SERIALIZED_FILENAME ="alarms.bin";
 	private List<Alarm> alarms;

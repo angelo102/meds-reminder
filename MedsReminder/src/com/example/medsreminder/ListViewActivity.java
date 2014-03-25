@@ -1,7 +1,9 @@
 package com.example.medsreminder;
 
 import android.os.Bundle;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -35,7 +37,6 @@ public class ListViewActivity extends ListActivity {
 		
 	}
 
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -43,7 +44,6 @@ public class ListViewActivity extends ListActivity {
 		return true;
 	}
 
-	
 	@Override
 	  protected void onListItemClick(ListView l, View v, int position, long id) {
 	    
@@ -66,19 +66,41 @@ public class ListViewActivity extends ListActivity {
 
 	}
 	
-	public void deleteAlarm(View view){
+	public void deleteAlarm(final View view){
 		
-        //Get Button Clicked and Row Index
-        RelativeLayout vwParentRow = (RelativeLayout)view.getParent();
-        ImageButton btnChild = (ImageButton)vwParentRow.getChildAt(1);
-        int rowIndex = Integer.parseInt(btnChild.getTag().toString());
-       
-        //Delete the alarm
-        alarmManager.DeleteAlarm(rowIndex);
-        alarmManager.serializeClass(view.getContext());
-        //Reload Activity
-        finish();
-        startActivity(getIntent());
+        //Confirm before deleting an alarm
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(view.getContext());
+        alertBuilder.setMessage("Are you dure you want to delete?");
+        alertBuilder.setCancelable(true);
+        alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				
+				//Get Button Clicked and Row Index
+				final RelativeLayout vwParentRow = (RelativeLayout)view.getParent();
+		        ImageButton btnChild = (ImageButton)vwParentRow.getChildAt(1);
+		        int rowIndex = Integer.parseInt(btnChild.getTag().toString());
+		       
+		        //Delete the alarm
+		        alarmManager.DeleteAlarm(rowIndex);
+		        alarmManager.serializeClass(view.getContext());
+		        
+		        //Reload Activity
+		        finish();
+		        startActivity(getIntent());
+				
+		        dialog.cancel();
+				
+				
+			}
+        });
+        alertBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = alertBuilder.create();
+        alertDialog.show();
              
     }
 }
