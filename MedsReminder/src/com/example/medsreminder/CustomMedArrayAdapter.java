@@ -27,28 +27,14 @@ public class CustomMedArrayAdapter extends ArrayAdapter<String>{
 		
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View rowView = inflater.inflate(R.layout.rowlayout, parent, false);
+		
+		//Set text to TextView within the row layout
 		TextView textView = (TextView) rowView.findViewById(R.id.label);
-		
 		textView.setText(values[position]);
-		
-		//ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-		
-		//Button deleteButton = (Button)rowView.findViewById(R.id.deleteMedButton);
-		
-		// Change the icon for Windows and iPhone
-		/*
-		String s = values[position];
-		if (s.startsWith("Windows7") || s.startsWith("iPhone")
-				|| s.startsWith("Solaris")) {
-			imageView.setImageResource(R.drawable.no);
-		} else {
-			imageView.setImageResource(R.drawable.ok);
-		}
-		
-		*/
-
-		//testing
-		//convertView.setOnClickListener(new OnItemClickListener(position));
+	
+		//To be able to identify row index on click event
+		Button deleteButton = (Button)rowView.findViewById(R.id.deleteMedButton);
+		deleteButton.setTag(position);
 		
 		return rowView;
 	}

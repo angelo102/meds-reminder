@@ -9,25 +9,23 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class ListViewActivity extends ListActivity {
 	
 	public final static String EXTRA_ALARM_ID ="com.example.medsreminder.ALARM_ID";
-
+	AlarmManager alarmManager;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		//Get saved alarms
-		AlarmManager alarmManager = new AlarmManager();
+		alarmManager = new AlarmManager();
 		alarmManager = alarmManager.loadSerializedClass(getApplicationContext());
 		String [] values = alarmManager.GetAlarmNames();
-		
-		//Display alarms on Listview via adapter
-		//ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, values);
-		//setListAdapter(adapter);
 		
 		CustomMedArrayAdapter adapter = new CustomMedArrayAdapter(this, values);
 	    setListAdapter(adapter);
@@ -67,28 +65,19 @@ public class ListViewActivity extends ListActivity {
 
 	}
 	
-	public void deleteAlarm(View v) 
-    {
-          
-        //reset all the listView items background colours 
-        //before we set the clicked one..
-        ListView lvItems = getListView();
-        //for (int i=0; i < lvItems.getChildCount(); i++) 
-        //{
-        //    lvItems.getChildAt(i).setBackgroundColor(Color.BLUE);        
-        //}
-        
-        //get the row the clicked button is in
-        LinearLayout vwParentRow = (LinearLayout)v.getParent();
-         
-        //TextView child = (TextView)vwParentRow.getChildAt(0);
+	public void deleteAlarm(View view){
+		
+        //Get Button Clicked and Row Index
+        RelativeLayout vwParentRow = (RelativeLayout)view.getParent();
         Button btnChild = (Button)vwParentRow.getChildAt(1);
-       // btnChild.setText(child.getText());
-        btnChild.setText("I've been clicked!");
-        
-        //int c = Color.CYAN;
-        
-        //vwParentRow.setBackgroundColor(c); 
-        //vwParentRow.refreshDrawableState();       
+        int rowIndex = Integer.parseInt(btnChild.getTag().toString());
+       
+        //Delete the alarm
+        alarmManager.DeleteAlarm(rowIndex);
+        alarmManager.serializeClass(view.getContext());
+        //Reload Activity
+        finish();
+        startActivity(getIntent());
+             
     }
 }

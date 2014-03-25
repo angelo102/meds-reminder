@@ -274,9 +274,7 @@ public class MedDetailActivity extends Activity {
 	//Needed to run onActivityResult on DialogFragment Class
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        String h = "Ddd";
-		h="555";
+    { 
 		if (requestCode == PhotoManager.REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 
             imageViewMedicine.setImageBitmap(photoManager.GetBitmap(IMAGE_VIEW_WIDTH, IMAGE_VIEW_HEIGHT));            
@@ -284,14 +282,11 @@ public class MedDetailActivity extends Activity {
         }
 		else if(requestCode == PhotoManager.SELECT_FILE && resultCode == RESULT_OK) {
 			
-			//photoManager.setPhotoFileUri(data.getData().);
 			String absolutePath = photoManager.GetImageAbsolutePath(this, data.getData());
 			photoManager.setPhotoPath(absolutePath);
 			
 			imageViewMedicine.setImageBitmap(photoManager.GetBitmap(IMAGE_VIEW_WIDTH, IMAGE_VIEW_HEIGHT));
-			
 		}
-		
     }
 	
 	
