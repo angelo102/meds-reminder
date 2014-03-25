@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-	android:orientation="horizontal" >
+	android:orientation="horizontal" 
+	android:descendantFocusability="blocksDescendants">
 
     <TextView
         android:id="@+id/label"
@@ -10,21 +11,19 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:text="A Medicine"
-        android:textSize="30sp"
-        android:focusableInTouchMode="false"
-		android:clickable="false"
-		android:focusable="false">
+        android:textSize="30dp">
         
     </TextView>
     
-    <Button 
-        style="@style/btnStyleArsenic"
+    <ImageButton 
+        android:id="@+id/deleteMedButton"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_alignParentRight="true"
-        android:focusable="false"
-        android:text="Delete" 
+        android:background="@android:color/transparent"
         android:onClick="deleteAlarm" 
-        android:id="@+id/deleteMedButton"/>
+        android:src="@drawable/trashcan"/>
+    
+    
 
 </RelativeLayout> 

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -69,7 +70,7 @@ public class ListViewActivity extends ListActivity {
 		
         //Get Button Clicked and Row Index
         RelativeLayout vwParentRow = (RelativeLayout)view.getParent();
-        Button btnChild = (Button)vwParentRow.getChildAt(1);
+        ImageButton btnChild = (ImageButton)vwParentRow.getChildAt(1);
         int rowIndex = Integer.parseInt(btnChild.getTag().toString());
        
         //Delete the alarm

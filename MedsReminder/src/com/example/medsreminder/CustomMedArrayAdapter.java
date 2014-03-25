@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -33,7 +34,7 @@ public class CustomMedArrayAdapter extends ArrayAdapter<String>{
 		textView.setText(values[position]);
 	
 		//To be able to identify row index on click event
-		Button deleteButton = (Button)rowView.findViewById(R.id.deleteMedButton);
+		ImageButton deleteButton = (ImageButton)rowView.findViewById(R.id.deleteMedButton);
 		deleteButton.setTag(position);
 		
 		return rowView;
