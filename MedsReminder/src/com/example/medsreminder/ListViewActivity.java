@@ -70,7 +70,7 @@ public class ListViewActivity extends ListActivity {
 		
         //Confirm before deleting an alarm
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(view.getContext());
-        alertBuilder.setMessage("Are you dure you want to delete?");
+        alertBuilder.setMessage("Are you sure you want to delete?");
         alertBuilder.setCancelable(true);
         alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
