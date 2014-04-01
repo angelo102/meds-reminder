@@ -21,11 +21,12 @@
     <string name="detailview_checkbox_textview_tue">Tu</string>
     <string name="detailview_checkbox_textview_wed">We</string>
     <string name="detailview_checkbox_textview_thr">Th</string>
-    <string name="detailview_checkbox_textview_fri">Fr</string>
-    <string name="detailview_checkbox_textview_sat">Sa</string>
+    <string name="detailview_checkbox_textview_sat">Sa</string><string name="detailview_checkbox_textview_fri">Fr</string>
     <string name="detailview_checkbox_textview_sun">Su</string>
     <string name="splashscreen_imageview_content">Spash Screen Application Picrure</string>
     <string name="listview_addbutton">+</string>
+    <string name="rowloayout_label">A Medicine</string>
+    <string name="rowlayout_imageDescription">Image for Displaying user pictures of medicines</string>
     
     
     
