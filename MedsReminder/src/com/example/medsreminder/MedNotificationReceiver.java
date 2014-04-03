@@ -15,6 +15,11 @@ public class MedNotificationReceiver extends BroadcastReceiver {
 			Bundle bundle = intent.getExtras();
 			String message = bundle.getString("alarm_message");
 			Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+			
+			Intent newIntent = new Intent(context, MedNotification.class);
+			newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(newIntent);
+			
 		} catch (Exception e) {
 			Toast.makeText(context, "There was an error somewhere, but we still received an alarm", Toast.LENGTH_SHORT).show();
 			e.printStackTrace();

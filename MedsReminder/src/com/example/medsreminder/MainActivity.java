@@ -39,6 +39,7 @@ public class MainActivity extends Activity {
 		 Intent intent = new Intent(view.getContext() , MedNotificationReceiver.class);
 		 intent.setAction("com.example.medsreminder.MedNotificationReceiver");
 		 intent.putExtra("alarm_message", "O'Doyle Rules!");
+		 
 		 // In reality, you would want to have a static variable for the request code instead of 192837
 		 PendingIntent sender = PendingIntent.getBroadcast(this, 192837, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 		 

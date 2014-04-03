@@ -7,12 +7,14 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
-   
-    <uses-feature android:name="android.hardware.camera"
-                  android:required="true" />
-    
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-                     android:maxSdkVersion="19" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="19" />
 
     <application
         android:allowBackup="true"
@@ -40,12 +42,16 @@
             android:name="com.example.medsreminder.MedDetailActivity"
             android:label="@string/title_activity_med_detail" >
         </activity>
-        
+
         <receiver
-            android:name=".MedNotificationReceiver"
+            android:name="com.example.medsreminder.MedNotificationReceiver"
             android:enabled="true" >
         </receiver>
 
+        <activity
+            android:name="com.example.medsreminder.MedNotification"
+            android:label="@string/title_activity_med_notification" >
+        </activity>
     </application>
 
 </manifest>
