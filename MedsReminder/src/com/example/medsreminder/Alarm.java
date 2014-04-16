@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 
 import android.content.Context;
 
@@ -17,7 +17,7 @@ public class Alarm implements Serializable{
 	
 	private String medName;
 	private String medDesciption;
-	private Date initialDate;
+	private Calendar initialDate;
 	private Time initialTime;
 	private boolean monRepeat;
 	private boolean tueRepeat;
@@ -48,11 +48,11 @@ public class Alarm implements Serializable{
 		this.medDesciption = medDesciption;
 	}
 
-	public Date getInitialDate() {
+	public Calendar getInitialDate() {
 		return initialDate;
 	}
 
-	public void setInitialDate(Date initialDate) {
+	public void setInitialDate(Calendar initialDate) {
 		this.initialDate = initialDate;
 	}
 

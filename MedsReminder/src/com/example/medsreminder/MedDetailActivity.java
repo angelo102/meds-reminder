@@ -1,6 +1,6 @@
 package com.example.medsreminder;
 
-import java.util.Date;
+import java.util.Calendar;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -85,8 +85,11 @@ public class MedDetailActivity extends Activity {
 				int year = datePicker.getYear();
 				int month = datePicker.getMonth();
 				int day = datePicker.getDayOfMonth();
-				al.setInitialDate(new Date(year,month,day));
-
+				
+				Calendar cal = Calendar.getInstance();
+				cal.set(year, month, day);
+				al.setInitialDate(cal);
+				
 				Time time = new Time();
 				time.setHour(timePicker.getCurrentHour());
 				time.setMinutes(timePicker.getCurrentMinute());
@@ -116,6 +119,8 @@ public class MedDetailActivity extends Activity {
 				else
 					alarmManager.getAlarms().set(Integer.parseInt(alarmId),al);  
 
+				
+				alarmManager.ScheduleAlarms(view.getContext());
 				alarmManager.serializeClass(view.getContext());
 
 				Toast.makeText(this, "Alarm Saved", Toast.LENGTH_LONG).show();
@@ -162,9 +167,9 @@ public class MedDetailActivity extends Activity {
 				editTextDesc.setText(alarm.getMedDesciption());
 				editTextDose.setText(String.valueOf(alarm.getDose()));
 				
-				int year = alarm.getInitialDate().getYear();
-				int month = alarm.getInitialDate().getMonth();
-				int day  = alarm.getInitialDate().getDate();
+				int year = alarm.getInitialDate().get(Calendar.YEAR);
+				int month = alarm.getInitialDate().get(Calendar.MONTH);
+				int day  = alarm.getInitialDate().get(Calendar.DAY_OF_MONTH);
 				datePicker.init(year, month, day , null);
 				
 				timePicker.setCurrentHour(alarm.getInitialTime().getHour());

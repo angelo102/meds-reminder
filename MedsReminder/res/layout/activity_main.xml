@@ -23,5 +23,14 @@
         android:layout_below="@+id/textViewName"
         android:onClick="sendMessage"
         android:text="Button" />
+    
+    <Button
+        android:id="@+id/buttonCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        
+        android:layout_below="@+id/buttonAddMed"
+        android:onClick="cancelMessage"
+        android:text="Cancel Alarm" />
 
 </RelativeLayout>

@@ -8,6 +8,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
@@ -29,14 +30,11 @@ public class MainActivity extends Activity {
 	
 	public void sendMessage(View view){
 		
-		//Intent intent = new Intent(this,ListViewActivity.class);
-		//startActivity(intent);
-		
 		// get a Calendar object with current time
 		 Calendar cal = Calendar.getInstance();
 		 // add 5 minutes to the calendar object
 		 cal.add(Calendar.SECOND, 5);
-		 Intent intent = new Intent(view.getContext() , MedNotificationReceiver.class);
+		 Intent intent = new Intent(this , MedNotificationReceiver.class);
 		 intent.setAction("com.example.medsreminder.MedNotificationReceiver");
 		 intent.putExtra("alarm_message", "O'Doyle Rules!");
 		 
@@ -45,7 +43,45 @@ public class MainActivity extends Activity {
 		 
 		 // Get the AlarmManager service
 		 android.app.AlarmManager am = (android.app.AlarmManager) getSystemService(ALARM_SERVICE);
-		 am.set(android.app.AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), sender);
+		 am.set(android.app.AlarmManager.RTC_WAKEUP,  cal.getTimeInMillis(), sender);
+		 
+		 //alarm2
+		 Calendar cal2 = Calendar.getInstance();
+		 // add 5 minutes to the calendar object
+		 cal2.add(Calendar.SECOND, 10);
+		 
+		 Intent intent2 = new Intent(this  , MedNotificationReceiver.class);
+		 intent2.setAction("com.example.medsreminder.MedNotificationReceiver");
+		 intent2.putExtra("alarm_message", "O'Doyle Rules2222222222!");
+		 
+		 // In reality, you would want to have a static variable for the request code instead of 192837
+		 PendingIntent sender2 = PendingIntent.getBroadcast(this, 192837+1, intent2, PendingIntent.FLAG_UPDATE_CURRENT);
+		 
+		 // Get the AlarmManager service
+		 //android.app.AlarmManager am2 = (android.app.AlarmManager) getSystemService(ALARM_SERVICE);
+		 am.set(android.app.AlarmManager.RTC_WAKEUP, cal2.getTimeInMillis(), sender2);
+		
+		 Toast.makeText(this, "Alarms Created", Toast.LENGTH_SHORT).show();
+	}
+	
+	
+	public void cancelMessage(View view){
+		 
+		Intent intent = new Intent(this , MedNotificationReceiver.class);
+		intent.setAction("com.example.medsreminder.MedNotificationReceiver");
+		 //intent.putExtra("alarm_message", "O'Doyle Rules!");
+		 
+		PendingIntent alarmIntent = PendingIntent.getBroadcast(this , 192837, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		android.app.AlarmManager am = (android.app.AlarmManager) getSystemService(ALARM_SERVICE);
+		am.cancel(alarmIntent);
+		
+		Intent intent2 = new Intent(this  , MedNotificationReceiver.class);
+		intent2.setAction("com.example.medsreminder.MedNotificationReceiver");
+		PendingIntent alarmIntent2 = PendingIntent.getBroadcast(this , 192837+1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		am.cancel(alarmIntent2); 
+		
+		
+		Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
 	}
 	
 }

@@ -6,15 +6,21 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 
 public class AlarmManager implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	public final static String SERIALIZED_FILENAME ="alarms.bin";
 	private List<Alarm> alarms;
+	
+	private final static int SCHEDULE_ALARM_ID = 0;
+	private int scheduledAlarmsCount = 0;
 	
 	public AlarmManager(){
 		alarms = new ArrayList<Alarm>();
@@ -97,6 +103,45 @@ public class AlarmManager implements Serializable {
 		}
 		
 		return alarmManager;
+	}
+	
+	
+	//Alarm scheduling with AlarmManager
+	public void ScheduleAlarms(Context c){
+		
+		for (int i = 0; i < alarms.size(); i++){
+			
+			Alarm al = alarms.get(i);
+			
+			//Set alarm time
+			Calendar cal = Calendar.getInstance();
+			cal.setTimeInMillis(System.currentTimeMillis());
+			cal.set(Calendar.HOUR_OF_DAY, al.getInitialTime().getHour());
+			cal.set(Calendar.MINUTE, al.getInitialTime().getMinutes());
+			cal.set(Calendar.SECOND, 0);
+			
+			Intent intent = new Intent(c , MedNotificationReceiver.class);
+			intent.setAction("com.example.medsreminder.MedNotificationReceiver");
+			intent.putExtra("alarm_message", "O'Doyle Rules!");
+			 
+			 // In reality, you would want to have a static variable for the request code instead of 192837
+			 PendingIntent sender = PendingIntent.getBroadcast(c, SCHEDULE_ALARM_ID + i , intent, PendingIntent.FLAG_UPDATE_CURRENT);
+			 
+			 // Get the AlarmManager service
+			 android.app.AlarmManager am = (android.app.AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
+			 am.set(android.app.AlarmManager.RTC_WAKEUP,  cal.getTimeInMillis(), sender);
+			 
+			 
+			 
+		}
+		
+		//set flag
+		scheduledAlarmsCount = alarms.size();
+			
+	}
+	
+	public void CancelScheduledAlarms(){
+		
 	}
 	
 	

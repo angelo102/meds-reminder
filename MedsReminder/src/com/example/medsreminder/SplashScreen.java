@@ -21,8 +21,8 @@ public class SplashScreen extends Activity {
 					
 					@Override
 					public void run(){
-						//Intent i = new Intent(SplashScreen.this, ListViewActivity.class);
-						Intent i = new Intent(SplashScreen.this, MainActivity.class);
+						Intent i = new Intent(SplashScreen.this, ListViewActivity.class);
+						//Intent i = new Intent(SplashScreen.this, MainActivity.class);
 						startActivity(i);
 						
 						finish();
