@@ -14,10 +14,19 @@ public class MedNotificationReceiver extends BroadcastReceiver {
 		try {
 			Bundle bundle = intent.getExtras();
 			String message = bundle.getString("alarm_message");
+			String photoPath = bundle.getString("photo_path");
+			String medName = bundle.getString("med_name");
+			String medDose = bundle.getString("med_dose");
+			
+			
 			Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 			
 			Intent newIntent = new Intent(context, MedNotification.class);
 			newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			newIntent.putExtra("photo_path", photoPath);
+			newIntent.putExtra("med_name", medName);
+			newIntent.putExtra("med_dose", medDose);
+			
 			context.startActivity(newIntent);
 			
 		} catch (Exception e) {

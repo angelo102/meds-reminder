@@ -123,6 +123,9 @@ public class AlarmManager implements Serializable {
 			Intent intent = new Intent(c , MedNotificationReceiver.class);
 			intent.setAction("com.example.medsreminder.MedNotificationReceiver");
 			intent.putExtra("alarm_message", "O'Doyle Rules!");
+			intent.putExtra("photo_path", al.getImagePath());
+			intent.putExtra("med_name", al.getMedName());
+			intent.putExtra("med_dose", String.valueOf(al.getDose()));
 			 
 			 // In reality, you would want to have a static variable for the request code instead of 192837
 			 PendingIntent sender = PendingIntent.getBroadcast(c, SCHEDULE_ALARM_ID + i , intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -131,8 +134,6 @@ public class AlarmManager implements Serializable {
 			 android.app.AlarmManager am = (android.app.AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
 			 am.set(android.app.AlarmManager.RTC_WAKEUP,  cal.getTimeInMillis(), sender);
 			 
-			 
-			 
 		}
 		
 		//set flag
@@ -140,8 +141,17 @@ public class AlarmManager implements Serializable {
 			
 	}
 	
-	public void CancelScheduledAlarms(){
-		
+	public void CancelScheduledAlarms(Context c){
+		for (int i = 0; i < scheduledAlarmsCount; i++){
+			
+			Intent intent = new Intent(c , MedNotificationReceiver.class);
+			intent.setAction("com.example.medsreminder.MedNotificationReceiver");
+			 //intent.putExtra("alarm_message", "O'Doyle Rules!");
+			 
+			PendingIntent alarmIntent = PendingIntent.getBroadcast(c , SCHEDULE_ALARM_ID + i, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+			android.app.AlarmManager am = (android.app.AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
+			am.cancel(alarmIntent);
+		}
 	}
 	
 	

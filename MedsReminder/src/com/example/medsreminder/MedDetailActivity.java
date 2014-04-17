@@ -119,8 +119,9 @@ public class MedDetailActivity extends Activity {
 				else
 					alarmManager.getAlarms().set(Integer.parseInt(alarmId),al);  
 
-				
+				alarmManager.CancelScheduledAlarms(view.getContext());
 				alarmManager.ScheduleAlarms(view.getContext());
+				
 				alarmManager.serializeClass(view.getContext());
 
 				Toast.makeText(this, "Alarm Saved", Toast.LENGTH_LONG).show();
