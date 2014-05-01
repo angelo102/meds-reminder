@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:onClick="cancelMethod"
+                android:onClick="stopPlay"
                 android:text="@string/detailview_button_cancel" />
         </TableRow>
 

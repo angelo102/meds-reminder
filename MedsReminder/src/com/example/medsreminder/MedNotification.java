@@ -1,8 +1,10 @@
 package com.example.medsreminder;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +18,8 @@ public class MedNotification extends Activity {
 	ImageView imageViewMedicine;
 	TextView textViewMedName;
 	TextView textViewMedDose;
+	
+	MediaPlayer mediaPlayer;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,11 @@ public class MedNotification extends Activity {
 		textViewMedDose = (TextView)findViewById(R.id.txtMedDose);
 		String medDose = getIntent().getStringExtra("med_dose");
 		textViewMedDose.setText("Medicine Dose: " + medDose);
+		
+		
+		//start playing sound of alarm
+		mediaPlayer = MediaPlayer.create(this, R.raw.sirennoise);
+		mediaPlayer.start(); // no need to call prepare(); create() does that for you
 	}
 
 	@Override
@@ -45,6 +54,10 @@ public class MedNotification extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.med_notification, menu);
 		return true;
+	}
+	
+	public void stopPlay(View view){
+		mediaPlayer.stop();
 	}
 
 }
