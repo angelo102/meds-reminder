@@ -71,8 +71,8 @@
                 android:layout_height="wrap_content"
                 
                 android:layout_weight="1"
-                android:onClick="saveMethod"
-                android:text="@string/detailview_button_save" />
+                android:onClick="startPlay"
+                android:text="Start" />
 
             <Button
                 style="@style/btnStyleArsenic"
@@ -80,8 +80,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
+                android:onClick="snoozePlay"
+                android:text="Snooze" />
+            
+            <Button
+                style="@style/btnStyleArsenic"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
                 android:onClick="stopPlay"
-                android:text="@string/detailview_button_cancel" />
+                android:text="Stop" />
         </TableRow>
 
     </TableLayout>
