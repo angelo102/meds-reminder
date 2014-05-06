@@ -155,6 +155,13 @@ public class MedDetailActivity extends Activity {
 			if(alarmId.equals("NEW ALARM")){
 				editTextHourInterval.setText(String.valueOf(0));
 				editTextMinuteInterval.setText(String.valueOf(0));
+				chkBoxMon.setChecked(true);
+				chkBoxTue.setChecked(true);
+				chkBoxWed.setChecked(true);
+				chkBoxThu.setChecked(true);
+				chkBoxFri.setChecked(true);
+				chkBoxSat.setChecked(true);
+				chkBoxSun.setChecked(true);
 				Toast.makeText(this, "New Alarm", Toast.LENGTH_LONG).show();
 			}
 			else{

@@ -16,7 +16,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="It Is Time to Take Your Medicine!!" />
+                android:text="It Is Time to Take Your Medicine!!" 
+                android:textSize="20sp"/>
     
     <LinearLayout
         android:layout_marginTop="15dp"
@@ -48,7 +49,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:layout_weight="1"
-                android:text="Medicine Name Goes Here!!" />
+                android:text="Medicine Name Goes Here!!"
+                android:textSize="15sp" />
 
         </TableRow>
 
@@ -60,12 +62,13 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:layout_weight="1"
-                android:text="Dose Goes Here!!" />
+                android:text="Dose Goes Here!!"
+                android:textSize="15sp" />
         </TableRow>
 
         <TableRow
             android:layout_weight="1">
-            <Button
+            <!--  <Button
                 style="@style/btnStyleArsenic"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -73,6 +76,8 @@
                 android:layout_weight="1"
                 android:onClick="startPlay"
                 android:text="Start" />
+                
+                -->
 
             <Button
                 style="@style/btnStyleArsenic"

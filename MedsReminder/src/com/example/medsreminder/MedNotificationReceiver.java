@@ -13,13 +13,13 @@ public class MedNotificationReceiver extends BroadcastReceiver {
 		// TODO Auto-generated method stub
 		try {
 			Bundle bundle = intent.getExtras();
-			String message = bundle.getString("alarm_message");
+			//String message = bundle.getString("alarm_message");
 			String photoPath = bundle.getString("photo_path");
 			String medName = bundle.getString("med_name");
 			String medDose = bundle.getString("med_dose");
 			
 			
-			Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+			//Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 			
 			Intent newIntent = new Intent(context, MedNotification.class);
 			newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

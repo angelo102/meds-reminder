@@ -113,26 +113,42 @@ public class AlarmManager implements Serializable {
 			
 			Alarm al = alarms.get(i);
 			
-			//Set alarm time
-			Calendar cal = Calendar.getInstance();
-			cal.setTimeInMillis(System.currentTimeMillis());
-			cal.set(Calendar.HOUR_OF_DAY, al.getInitialTime().getHour());
-			cal.set(Calendar.MINUTE, al.getInitialTime().getMinutes());
-			cal.set(Calendar.SECOND, 0);
+			if(al.isTueRepeat()){ //only if it is tuesday
 			
-			Intent intent = new Intent(c , MedNotificationReceiver.class);
-			intent.setAction("com.example.medsreminder.MedNotificationReceiver");
-			intent.putExtra("alarm_message", "O'Doyle Rules!");
-			intent.putExtra("photo_path", al.getImagePath());
-			intent.putExtra("med_name", al.getMedName());
-			intent.putExtra("med_dose", String.valueOf(al.getDose()));
-			 
-			 // In reality, you would want to have a static variable for the request code instead of 192837
-			 PendingIntent sender = PendingIntent.getBroadcast(c, SCHEDULE_ALARM_ID + i , intent, PendingIntent.FLAG_UPDATE_CURRENT);
-			 
-			 // Get the AlarmManager service
-			 android.app.AlarmManager am = (android.app.AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
-			 am.set(android.app.AlarmManager.RTC_WAKEUP,  cal.getTimeInMillis(), sender);
+				//Set alarm time
+				Calendar cal = Calendar.getInstance();
+				cal.setTimeInMillis(System.currentTimeMillis());
+				cal.set(Calendar.HOUR_OF_DAY, al.getInitialTime().getHour());
+				cal.set(Calendar.MINUTE, al.getInitialTime().getMinutes());
+				cal.set(Calendar.SECOND, 0);
+				
+				Calendar cal2 = Calendar.getInstance();
+				if(cal.after(cal2)){  //only if greater
+				
+					Intent intent = new Intent(c , MedNotificationReceiver.class);
+					intent.setAction("com.example.medsreminder.MedNotificationReceiver");
+					//intent.putExtra("alarm_message", "O'Doyle Rules!");
+					intent.putExtra("photo_path", al.getImagePath());
+					intent.putExtra("med_name", al.getMedName());
+					intent.putExtra("med_dose", String.valueOf(al.getDose()));
+					 
+					 // In reality, you would want to have a static variable for the request code instead of 192837
+					 PendingIntent sender = PendingIntent.getBroadcast(c, SCHEDULE_ALARM_ID + i , intent, PendingIntent.FLAG_UPDATE_CURRENT);
+					 
+					 if(al.getMinutesInterval() == 0 ){
+					 // Get the AlarmManager service
+						 android.app.AlarmManager am = (android.app.AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
+						 am.set(android.app.AlarmManager.RTC_WAKEUP,  cal.getTimeInMillis(), sender);
+						
+					 }
+					 else{
+						 android.app.AlarmManager am = (android.app.AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
+						 am.setRepeating(android.app.AlarmManager.RTC_WAKEUP,  cal.getTimeInMillis(),al.getMinutesInterval()*60*1000, sender);
+					 }
+						 
+					
+				}
+			}
 			 
 		}
 		

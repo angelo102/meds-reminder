@@ -28,6 +28,6 @@
     <string name="listview_addbutton">+</string>
     <string name="rowloayout_label">A Medicine</string>
     <string name="rowlayout_imageDescription">Image for Displaying user pictures of medicines</string>
-    <string name="title_activity_med_notification">MedNotification</string>
+    <string name="title_activity_med_notification">Take your Meds!!!</string>
 
 </resources>
