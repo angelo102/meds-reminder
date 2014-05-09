@@ -1,10 +1,11 @@
-package com.example.medsreminder;
+package com.medsreminder.camera;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -31,8 +32,8 @@ public class PhotoManager extends DialogFragment{
 	//Dialog Title
 	public final static String DIALOG_TITLE ="ADD PHOTO!";
 	//Needed for Photo
-	static final int REQUEST_IMAGE_CAPTURE = 1;
-	static final int SELECT_FILE = 2;
+	public static final int REQUEST_IMAGE_CAPTURE = 1;
+	public static final int SELECT_FILE = 2;
 	
 	private File photoFile;
 	private Uri photoFileUri;
@@ -128,9 +129,9 @@ public class PhotoManager extends DialogFragment{
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		//Never reached here
-		
 	}
 	
+	@SuppressLint("SimpleDateFormat")
 	private File createImageFile(Context context) throws IOException{
 	
 		// Create an image file name
@@ -159,8 +160,8 @@ public class PhotoManager extends DialogFragment{
 	public Bitmap GetBitmap(int imageViewWidth, int imageViewHeight){
 		
 		// Get the dimensions of the View
-        int targetW = imageViewWidth;//imageViewMedicine.getWidth();
-        int targetH = imageViewHeight;//imageViewMedicine.getHeight();
+        int targetW = imageViewWidth;
+        int targetH = imageViewHeight;
 
         // Get the dimensions of the bitmap
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();

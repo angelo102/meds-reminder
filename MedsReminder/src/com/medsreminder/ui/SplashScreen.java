@@ -1,4 +1,6 @@
-package com.example.medsreminder;
+package com.medsreminder.ui;
+
+import com.example.medsreminder.R;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,7 +24,7 @@ public class SplashScreen extends Activity {
 					@Override
 					public void run(){
 						Intent i = new Intent(SplashScreen.this, ListViewActivity.class);
-						//Intent i = new Intent(SplashScreen.this, MainActivity.class);
+				
 						startActivity(i);
 						
 						finish();

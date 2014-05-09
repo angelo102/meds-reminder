@@ -13,6 +13,7 @@
     <string name="detailview_textview_dose">Dose:</string>
     <string name="detailview_textview_date">Date:</string>
     <string name="detailview_textview_time">Time:</string>
+    <string name="detailview_textview_image">Image:</string>
     <string name="detailview_textview_hinterval">Hour Interval:</string>
     <string name="detailview_textview_minterval">Min Interval:</string>
     <string name="detailview_button_save">Save</string>
@@ -29,5 +30,11 @@
     <string name="rowloayout_label">A Medicine</string>
     <string name="rowlayout_imageDescription">Image for Displaying user pictures of medicines</string>
     <string name="title_activity_med_notification">Take your Meds!!!</string>
-
+	<string name="activity_med_detail_btn_select_image">Choose Image</string>
+	<string name="activity_med_notification_txt_med_dose">Dose Goes Here!!</string>
+	<string name="activity_med_notification_txt_med_name">Medicine Name Goes Here!!</string>
+	<string name="activity_med_notification_txt_med_notification">It Is Time to Take Your Medicine!!</string>
+	<string name="activity_med_notification_btn_snooze">Snooze</string>
+	<string name="activity_med_notification_btn_stop">Stop</string>
+	
 </resources>

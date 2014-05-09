@@ -103,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" 
                     android:layout_gravity="left|center"/>
-                   <!--   android:layout_marginLeft="2.5dp" -->
+                   
             </TableRow>
 
             <TableRow
@@ -112,11 +112,11 @@
             		>
                 
                 <TextView
-                    android:id="@+id/textViewTime"
+                    android:id="@+id/textViewImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|center"
-                    android:text="Image:" />
+                     android:text="@string/detailview_textview_image" />
                 
                 <ImageView
                     android:id="@+id/imageViewMedicine"
@@ -125,15 +125,14 @@
                     android:layout_marginLeft="7.5dp"
                     android:gravity="center_horizontal|center_vertical"
                     android:src="@drawable/ic_launcher" 
+                    android:contentDescription="@string/splashscreen_imageview_content"
                     
                     android:background="#ff33b5e5"
-			        android:paddingLeft="6px"
-			        android:paddingTop="4px"
-			        android:paddingRight="8px"
-			        android:paddingBottom="9px"/>
-
-                   <!--  android:layout_height="wrap_content" -->
-                   
+			        android:paddingLeft="6dp"
+			        android:paddingTop="4dp"
+			        android:paddingRight="8dp"
+			        android:paddingBottom="9dp"/>
+                 
             </TableRow>
             
             <TableRow
@@ -145,7 +144,7 @@
                     style="@style/btnStyleArsenic"
                     android:onClick="selectImage"
                     android:gravity="center_horizontal|center_vertical"
-                    android:text="Choose Image" />
+                    android:text="@string/activity_med_detail_btn_select_image" />
 			</TableRow>
 			
             <TableRow>

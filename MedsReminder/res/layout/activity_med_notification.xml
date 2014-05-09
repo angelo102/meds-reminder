@@ -16,7 +16,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="It Is Time to Take Your Medicine!!" 
+                android:text="@string/activity_med_notification_txt_med_notification" 
                 android:textSize="20sp"/>
     
     <LinearLayout
@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:layout_weight="1"
-                android:text="Medicine Name Goes Here!!"
+                android:text="@string/activity_med_notification_txt_med_name" 
                 android:textSize="15sp" />
 
         </TableRow>
@@ -62,23 +62,13 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:layout_weight="1"
-                android:text="Dose Goes Here!!"
+                android:text="@string/activity_med_notification_txt_med_dose" 
                 android:textSize="15sp" />
         </TableRow>
 
         <TableRow
             android:layout_weight="1">
-            <!--  <Button
-                style="@style/btnStyleArsenic"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                
-                android:layout_weight="1"
-                android:onClick="startPlay"
-                android:text="Start" />
-                
-                -->
-
+          
             <Button
                 style="@style/btnStyleArsenic"
                 android:layout_width="0dp"
@@ -86,7 +76,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:onClick="snoozePlay"
-                android:text="Snooze" />
+                android:text="@string/activity_med_notification_btn_snooze"  />
             
             <Button
                 style="@style/btnStyleArsenic"
@@ -95,7 +85,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:onClick="stopPlay"
-                android:text="Stop" />
+                android:text="@string/activity_med_notification_btn_stop"  />
         </TableRow>
 
     </TableLayout>

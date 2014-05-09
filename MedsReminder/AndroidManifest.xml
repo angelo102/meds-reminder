@@ -28,7 +28,7 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.medsreminder.SplashScreen"
+            android:name="com.medsreminder.ui.SplashScreen"
             android:label="@string/title_activity_splash_screen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,11 +37,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.medsreminder.ListViewActivity"
+            android:name="com.medsreminder.ui.ListViewActivity"
             android:label="@string/title_activity_list_view" >
         </activity>
-        <activity
-            android:name="com.example.medsreminder.MedDetailActivity"
+        <activity 
+            android:name="com.medsreminder.ui.MedDetailActivity"     
             android:label="@string/title_activity_med_detail" >
         </activity>
 
@@ -51,7 +51,7 @@
         </receiver>
 
         <activity
-            android:name="com.example.medsreminder.MedNotification"
+            android:name="com.medsreminder.ui.MedNotification"     
             android:label="@string/title_activity_med_notification" >
         </activity>
     </application>

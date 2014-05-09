@@ -1,6 +1,13 @@
-package com.example.medsreminder;
+package com.medsreminder.ui;
 
 import java.util.Calendar;
+
+import com.example.medsreminder.R;
+
+
+import com.medsreminder.camera.PhotoManager;
+import com.medsreminder.notification.MedNotificationReceiver;
+import com.medsreminder.notification.WakeLocker;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -15,7 +22,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,11 +59,8 @@ public class MedNotification extends Activity {
 		shareprefs = PreferenceManager.getDefaultSharedPreferences(this);
 		String prefColor = shareprefs.getString("color", "");
 	
-		//LinearLayout l = (LinearLayout)findViewById(R.layout.activity_med_notification);
-		//l.setBackgroundColor(this.getUserColor(Integer.parseInt(prefColor)));
 		View view = this.getWindow().getDecorView();
 	    view.setBackgroundColor(this.getUserColor(Integer.parseInt(prefColor)));
-		
 		
 		//Set Medicine Image
 		imageViewMedicine = (ImageView)findViewById(R.id.imgMed);
@@ -77,15 +81,13 @@ public class MedNotification extends Activity {
 		
 		
 		//start playing sound of alarm
-		
-		//SharedPreferences shareprefs = PreferenceManager.getDefaultSharedPreferences(this);
 		String pref = shareprefs.getString("ring", "");
 		
 		int soundId = this.getAlarmSoundId(Integer.parseInt(pref));
 		mediaPlayer = MediaPlayer.create(this, soundId);
 		mediaPlayer.setLooping(true);
 		
-		mediaPlayer.start(); // no need to call prepare(); create() does that for you
+		mediaPlayer.start(); 
 	}
 
 	@Override
@@ -98,8 +100,6 @@ public class MedNotification extends Activity {
 	public void stopPlay(View view){
 		if(mediaPlayer.isPlaying()){
 			mediaPlayer.pause();
-		
-			//mediaPlayer.stop();
 		}
 		else if(!mediaPlayer.isPlaying()){
 			mediaPlayer.stop();
@@ -113,29 +113,11 @@ public class MedNotification extends Activity {
 		
 	}
 	
-	/*public void startPlay(View view){
-		if(!mediaPlayer.isPlaying()){
-			mediaPlayer.start();
-		}
-		
-		SharedPreferences shareprefs = PreferenceManager.getDefaultSharedPreferences(view.getContext());
-		String pref = shareprefs.getString("lang", "");
-		
-		Toast.makeText(this, pref, Toast.LENGTH_LONG).show();
-		
-		
-	}
-	
-	*/
 	
 	public void snoozePlay(View view){
 		//Set alarm time
 		Calendar cal = Calendar.getInstance();
-		//cal.setTimeInMillis(System.currentTimeMillis());
-		//cal.set(Calendar.HOUR_OF_DAY, al.getInitialTime().getHour());
-		//cal.set(Calendar.MINUTE, al.getInitialTime().getMinutes());
-		//cal.set(Calendar.SECOND, 0);
-		
+	
 		String pref = shareprefs.getString("snooze", "");
 		int snoozeTime = this.getSnoozeTime(Integer.parseInt(pref));
 		
@@ -143,12 +125,11 @@ public class MedNotification extends Activity {
 		
 		Intent intent = new Intent(view.getContext() , MedNotificationReceiver.class);
 		intent.setAction("com.example.medsreminder.MedNotificationReceiver");
-		intent.putExtra("alarm_message", "O'Doyle Rules!");
+		
 		intent.putExtra("photo_path", photoPath);
 		intent.putExtra("med_name", medName);
 		intent.putExtra("med_dose", medDose);
 		 
-		 // In reality, you would want to have a static variable for the request code instead of 192837
 		 PendingIntent sender = PendingIntent.getBroadcast(view.getContext(), 3000/*SCHEDULE_ALARM_ID + i*/ , intent, PendingIntent.FLAG_UPDATE_CURRENT);
 		 
 		 // Get the AlarmManager service

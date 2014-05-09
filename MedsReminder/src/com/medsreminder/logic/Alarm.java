@@ -1,4 +1,4 @@
-package com.example.medsreminder;
+package com.medsreminder.logic;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -150,6 +150,19 @@ public class Alarm implements Serializable{
 
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
+	}
+	
+	public boolean[] getAlarmDaysArray(){
+		boolean[] dayArray = new boolean[7];
+		dayArray[0] = this.monRepeat;
+		dayArray[1] = this.tueRepeat;
+		dayArray[2] = this.wedRepeat;
+		dayArray[3] = this.thuRepeat;
+		dayArray[4] = this.friRepeat;
+		dayArray[5] = this.satRepeat;
+		dayArray[6] = this.sunRepeat;
+		
+		return dayArray;
 	}
 
 	public void serializeClass(Context c){

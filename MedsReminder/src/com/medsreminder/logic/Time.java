@@ -1,4 +1,4 @@
-package com.example.medsreminder;
+package com.medsreminder.logic;
 
 import java.io.Serializable;
 

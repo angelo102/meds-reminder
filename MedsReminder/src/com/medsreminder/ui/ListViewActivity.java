@@ -1,4 +1,8 @@
-package com.example.medsreminder;
+package com.medsreminder.ui;
+
+import com.example.medsreminder.R;
+
+import com.medsreminder.logic.AlarmManager;
 
 import android.os.Bundle;
 import android.app.AlertDialog;
@@ -22,9 +26,6 @@ public class ListViewActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		//Load settings fragment
-		
-		
 		//Get saved alarms
 		alarmManager = new AlarmManager();
 		alarmManager = alarmManager.loadSerializedClass(getApplicationContext());
@@ -41,21 +42,13 @@ public class ListViewActivity extends ListActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.list_view, menu);
-		
-		
 		return true;
 	}
 
 	@Override
 	 public boolean onOptionsItemSelected(MenuItem item) {
 
-	  /*
-	   * Because it's onlt ONE option in the menu.
-	   * In order to make it simple, We always start SetPreferenceActivity
-	   * without checking.
-	   */
-	  
-		 // Display the fragment as the main content.
+		// Display the fragment as the main content.
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new SettingsFragment())
                 .addToBackStack(null)
@@ -109,7 +102,6 @@ public class ListViewActivity extends ListActivity {
 				
 		        dialog.cancel();
 				
-				
 			}
         });
         alertBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -120,6 +112,5 @@ public class ListViewActivity extends ListActivity {
 
         AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
-             
     }
 }

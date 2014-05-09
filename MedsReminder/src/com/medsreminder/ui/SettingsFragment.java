@@ -1,4 +1,7 @@
-package com.example.medsreminder;
+package com.medsreminder.ui;
+
+import com.example.medsreminder.R;
+
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,7 +19,7 @@ public class SettingsFragment extends PreferenceFragment {
 	 
 	 public void onResume() {
 		    super.onResume();
-		    getView().setBackgroundColor(Color.WHITE);//16773837);
+		    getView().setBackgroundColor(Color.WHITE);
 		}
 
 }

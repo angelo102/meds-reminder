@@ -1,6 +1,15 @@
-package com.example.medsreminder;
+package com.medsreminder.ui;
 
 import java.util.Calendar;
+
+import com.example.medsreminder.R;
+
+import com.medsreminder.camera.PhotoManager;
+import com.medsreminder.logic.Alarm;
+import com.medsreminder.logic.AlarmManager;
+import com.medsreminder.logic.Time;
+
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -127,7 +136,7 @@ public class MedDetailActivity extends Activity {
 				Toast.makeText(this, "Alarm Saved", Toast.LENGTH_LONG).show();
 
 				Intent intent = new Intent(this,ListViewActivity.class);
-				//intent.putExtra(EXTRA_MESSAGE, message);
+				
 				startActivity(intent);
 			}
 		}

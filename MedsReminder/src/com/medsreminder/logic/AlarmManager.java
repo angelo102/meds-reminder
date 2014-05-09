@@ -1,4 +1,4 @@
-package com.example.medsreminder;
+package com.medsreminder.logic;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import com.medsreminder.notification.MedNotificationReceiver;
 
 import android.app.PendingIntent;
 import android.content.Context;
@@ -110,43 +112,39 @@ public class AlarmManager implements Serializable {
 	public void ScheduleAlarms(Context c){
 		
 		for (int i = 0; i < alarms.size(); i++){
-			
 			Alarm al = alarms.get(i);
-			
-			if(al.isTueRepeat()){ //only if it is tuesday
-			
-				//Set alarm time
-				Calendar cal = Calendar.getInstance();
-				cal.setTimeInMillis(System.currentTimeMillis());
-				cal.set(Calendar.HOUR_OF_DAY, al.getInitialTime().getHour());
-				cal.set(Calendar.MINUTE, al.getInitialTime().getMinutes());
-				cal.set(Calendar.SECOND, 0);
-				
-				Calendar cal2 = Calendar.getInstance();
-				if(cal.after(cal2)){  //only if greater
-				
-					Intent intent = new Intent(c , MedNotificationReceiver.class);
-					intent.setAction("com.example.medsreminder.MedNotificationReceiver");
-					//intent.putExtra("alarm_message", "O'Doyle Rules!");
-					intent.putExtra("photo_path", al.getImagePath());
-					intent.putExtra("med_name", al.getMedName());
-					intent.putExtra("med_dose", String.valueOf(al.getDose()));
-					 
-					 // In reality, you would want to have a static variable for the request code instead of 192837
-					 PendingIntent sender = PendingIntent.getBroadcast(c, SCHEDULE_ALARM_ID + i , intent, PendingIntent.FLAG_UPDATE_CURRENT);
-					 
-					 if(al.getMinutesInterval() == 0 ){
-					 // Get the AlarmManager service
-						 android.app.AlarmManager am = (android.app.AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
-						 am.set(android.app.AlarmManager.RTC_WAKEUP,  cal.getTimeInMillis(), sender);
-						
-					 }
-					 else{
-						 android.app.AlarmManager am = (android.app.AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
-						 am.setRepeating(android.app.AlarmManager.RTC_WAKEUP,  cal.getTimeInMillis(),al.getMinutesInterval()*60*1000, sender);
-					 }
-						 
+			for( boolean dayAlarm : al.getAlarmDaysArray() ){
+				if(dayAlarm == true){ 
+					//Set alarm time
+					Calendar cal = Calendar.getInstance();
+					cal.setTimeInMillis(System.currentTimeMillis());
+					cal.set(Calendar.HOUR_OF_DAY, al.getInitialTime().getHour());
+					cal.set(Calendar.MINUTE, al.getInitialTime().getMinutes());
+					cal.set(Calendar.SECOND, 0);
 					
+					Calendar cal2 = Calendar.getInstance();
+					if(cal.after(cal2)){  //only if greater
+					
+						Intent intent = new Intent(c , MedNotificationReceiver.class);
+						intent.setAction("com.example.medsreminder.MedNotificationReceiver");
+						
+						intent.putExtra("photo_path", al.getImagePath());
+						intent.putExtra("med_name", al.getMedName());
+						intent.putExtra("med_dose", String.valueOf(al.getDose()));
+						 
+						 //Start assigning id to each alarm.
+						 PendingIntent sender = PendingIntent.getBroadcast(c, SCHEDULE_ALARM_ID + i , intent, PendingIntent.FLAG_UPDATE_CURRENT);
+						 
+						 if(al.getMinutesInterval() == 0 ){
+							 // Get the AlarmManager service
+							 android.app.AlarmManager am = (android.app.AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
+							 am.set(android.app.AlarmManager.RTC_WAKEUP,  cal.getTimeInMillis(), sender);
+						 }
+						 else{
+							 android.app.AlarmManager am = (android.app.AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
+							 am.setRepeating(android.app.AlarmManager.RTC_WAKEUP,  cal.getTimeInMillis(),al.getMinutesInterval()*60*1000, sender);
+						 }	 
+					}
 				}
 			}
 			 
@@ -157,20 +155,18 @@ public class AlarmManager implements Serializable {
 			
 	}
 	
+	//Cancel previous alarms	
 	public void CancelScheduledAlarms(Context c){
 		for (int i = 0; i < scheduledAlarmsCount; i++){
 			
 			Intent intent = new Intent(c , MedNotificationReceiver.class);
 			intent.setAction("com.example.medsreminder.MedNotificationReceiver");
-			 //intent.putExtra("alarm_message", "O'Doyle Rules!");
+			
 			 
 			PendingIntent alarmIntent = PendingIntent.getBroadcast(c , SCHEDULE_ALARM_ID + i, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 			android.app.AlarmManager am = (android.app.AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
 			am.cancel(alarmIntent);
 		}
 	}
-	 
-	
-	
 
 }

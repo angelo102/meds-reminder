@@ -1,13 +1,16 @@
-package com.example.medsreminder;
+package com.medsreminder.notification;
+
+import com.medsreminder.ui.MedNotification;
 
 import android.content.Context;
 import android.os.PowerManager;
 
-
+//Used to wake phone when notification starts
 public abstract class WakeLocker {
     private static PowerManager.WakeLock wakeLock;
 
-    public static void acquire(Context ctx) {
+    @SuppressWarnings("deprecation")
+	public static void acquire(Context ctx) {
         if (wakeLock != null) wakeLock.release();
 
         PowerManager pm = (PowerManager) ctx.getSystemService(Context.POWER_SERVICE);

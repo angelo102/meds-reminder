@@ -1,4 +1,6 @@
-package com.example.medsreminder;
+package com.medsreminder.ui;
+
+import com.example.medsreminder.R;
 
 import android.content.Context;
 import android.view.LayoutInflater;

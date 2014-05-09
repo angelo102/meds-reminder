@@ -1,6 +1,10 @@
-package com.example.medsreminder;
+package com.medsreminder.ui;
 
 import java.util.Calendar;
+
+import com.example.medsreminder.R;
+
+import com.medsreminder.notification.MedNotificationReceiver;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -11,6 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 
+//This class was used for testing purposes only
 public class MainActivity extends Activity {
 
 	@Override
