@@ -1,0 +1,1 @@
+Android application project for managing reminders for taking medicine. The application will be able to remind in any time interval the quantity of medication to take.
